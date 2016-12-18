@@ -1,6 +1,6 @@
 ---
-title       : Insert the chapter title here
-description : Insert the chapter description here
+title       : Chapter 1
+description : Stuff and stuff
 attachments :
 
 --- type:NormalExercise lang:python xp:100 skills:1 key:ca2686ceeb
