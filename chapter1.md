@@ -171,11 +171,11 @@ test = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/cour
 
 ```{python}
 
-msg1 = "Great job!"
+msg1 = "Incorrect. Maybe have a look at the hint."
 msg2 = "Wrong, try again. Maybe have a look at the hint."
 msg3 = "Not so good... Maybe have a look at the hint."
-msg4 = "Incorrect. Maybe have a look at the hint."
-test_mc(correct = 1, msgs = [msg1, msg2, msg3, msg4])
+msg4 = "Great job!"
+test_mc(correct = 4, msgs = [msg1, msg2, msg3, msg4])
 
 success_msg("Well done! Now move on and explore some of the features in more detail.")
 
