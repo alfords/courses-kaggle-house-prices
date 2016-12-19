@@ -188,7 +188,7 @@ The object of the Kaggle competition is to is to predict the sale price of the p
 
 ```
 # absolute numbers
-train["SalePrive"]
+train["SalePrice"]
 ```
 
 *** =instructions
@@ -217,7 +217,7 @@ print()
 ```{python}
 
 # Sale Prices
-print(train["Survived"])
+print(train["SalePrice"])
 
 ```
 
