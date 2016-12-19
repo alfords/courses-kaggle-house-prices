@@ -105,7 +105,7 @@ print(test.head())
 import pandas as pd
 
 # Load the train and test datasets to create two DataFrames
-train_url = "http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv"
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
 
 test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
@@ -143,3 +143,41 @@ test_function("pandas.read_csv", 2,
 
 success_msg("Well done! Now that your data is loaded in, let's see if you can understand it.")
 ```
+
+--- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:5e47ef16d2
+## <<<New Exercise>>> 
+
+Before starting with the actual analysis, it's important to understand the structure of your data. Both `test` and `train` are DataFrame objects, the way pandas represent datasets. You can easily explore a DataFrame using the `.describe()` method. `.describe()` summarizes the columns/features of the DataFrame, including the count of observations, mean, max and so on. Another useful trick is to look at the dimensions of the DataFrame. This is done by requesting the `.shape` attribute of your DataFrame object. (ex. `your_data.shape`)
+
+The training and test set are already available in the workspace, as `train` and `test`. Apply `.describe()` method and print the `.shape` attribute of the training set. Which of the following statements is correct?
+
+*** =instructions
+- The training set has 1460 observations and 81 variables, count for LotFrontage is 1233.
+- The training set has 1459 observations and 80 variables, count for LotFrontage is 1459.
+- The testing set has 1459 observations and 81 variables, count for LotFrontage is 1234.
+- The testing set has 1459 observations and 80 variables, count for LotFrontage is 1232.
+
+*** =hint
+To see the description of the `test` variable try `test.describe()`.
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+train = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv")
+test = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv")
+```
+
+*** =sct
+
+```{python}
+
+msg1 = "Great job!"
+msg2 = "Wrong, try again. Maybe have a look at the hint."
+msg3 = "Not so good... Maybe have a look at the hint."
+msg4 = "Incorrect. Maybe have a look at the hint."
+test_mc(correct = 1, msgs = [msg1, msg2, msg3, msg4])
+
+success_msg("Well done! Now move on and explore some of the features in more detail.")
+
+```
+
