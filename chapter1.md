@@ -46,10 +46,18 @@ y = 6*9; print(y)
 
 *** =sct
 ```{python}
-# SCT written with pythonwhat: https://github.com/datacamp/pythonwhat/wiki
+msg = "Don't forget to assign the correct value to y"
+test_object("y", 
+            undefined_msg = msg, 
+            incorrect_msg = msg)
 
+msg = "Print out the resulting object, `y`!"
+test_function("print",2, 
+              not_called_msg = msg,
+              incorrect_msg = msg,
+              args=None)
 
-success_msg("Great work!")
+success_msg("Awesome! See how the console shows the result of the Python code you submitted? Now that you're familiar with the interface, let's get down to business!")
 ```
 
 --- type:NormalExercise lang:python xp:100 skills:2 key:672930f088
@@ -93,10 +101,45 @@ print(test.head())
 
 *** =solution
 ```{python}
+# Import the Pandas library
+import pandas as pd
 
+# Load the train and test datasets to create two DataFrames
+train_url = "http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+#Print the `head` of the train and test dataframes
+print(train.head())
+print(test.head())
 ```
 
 *** =sct
 ```{python}
+msg = "Have you correctly imported the `pandas` package? Use the alias `pd`."
+test_import("pandas",  not_imported_msg = msg,  incorrect_as_msg = msg)
 
+msg = "Do not touch the code that specifies the URLs of the training and test set csvs."
+test_object("train_url", undefined_msg = msg, incorrect_msg = msg)
+test_object("test_url", undefined_msg = msg, incorrect_msg = msg)
+
+msg = "Make sure you are using the `read_csv()` function correctly"
+test_function("pandas.read_csv", 1,
+              args=None,
+              not_called_msg = msg,
+              incorrect_msg = msg,)
+test_function("pandas.read_csv", 2,
+              args=None,
+              not_called_msg = msg,
+              incorrect_msg = msg)
+
+#msg = "Don't forget to print the first few rows of `train` with the `.head()` method"
+#test_function("print", 1, not_called_msg = msg, incorrect_msg = msg)
+
+#msg = "Don't forget to print the first few rows of `test` with the `.head()` method"
+#test_function("print", 2, not_called_msg = msg, incorrect_msg = msg)
+
+success_msg("Well done! Now that your data is loaded in, let's see if you can understand it.")
 ```
