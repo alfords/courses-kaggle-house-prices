@@ -181,3 +181,217 @@ success_msg("Well done! Now move on and explore some of the features in more det
 
 ```
 
+--- type:NormalExercise lang:python xp:100 skills:1 key:1eeaaeb294
+## Square Feet vs Lot Size  
+
+The object of the Kaggle competition is to is to predict the sale price of the properties listed in the test data set. We can see the sale price of the propeties listed in the training data set by using the standard bracket notation to select a single column of a DataFrame:
+
+```
+# absolute numbers
+train["SalePrive"]
+```
+
+*** =instructions
+- Calculate and print 
+
+*** =hint
+- hint
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+train = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv")
+test = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv")
+```
+
+*** =sample_code
+```{python}
+
+# Sale Prices
+print()
+
+
+```
+
+*** =solution
+```{python}
+
+# Sale Prices
+print(train["Survived"])
+
+```
+
+*** =sct
+
+```{python}
+msg = "Make sure you are using the bracket method correctly."
+test_function("print", 1,
+              not_called_msg= msg,
+              incorrect_msg = msg)
+
+success_msg("Well done!.")
+
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:b8f71cf4de
+## Does age play a role?
+
+Another variable that could influence survival is age; since it's probable that children were saved first. You can test this by creating a new column with a categorical variable `Child`. `Child` will take the value 1 in cases where age is less than 18, and a value of 0 in cases where age is greater than or equal to 18. 
+
+To add this new variable you need to do two things (i) create a new column, and (ii) provide the values for each observation (i.e., row) based on the age of the passenger.
+
+Adding a new column with Pandas in Python is easy and can be done via the following syntax:
+
+```
+your_data["new_var"] = 0
+```
+
+This code would create a new column in the `train` DataFrame titled `new_var` with `0` for each observation.
+
+To set the values based on the age of the passenger, you make use of a boolean test inside the square bracket operator. With the `[]`-operator you create a subset of rows and assign a value to a certain variable of that subset of observations. For example,
+
+```
+train["new_var"][train["Fare"] > 10] = 1
+```
+
+would give a value of `1` to the variable `new_var` for the subset of passengers whose fares greater than 10. Remember that `new_var` has a value of `0` for all other values (including missing values).
+
+A new column called `Child` in the `train` data frame has been created for you that takes the value `NaN` for all observations.
+
+*** =instructions
+- Set the values of `Child` to `1` is the passenger's age is less than 18 years. 
+- Then assign the value `0` to observations where the passenger is greater than or equal to 18 years in the new `Child` column. 
+- Compare the normalized survival rates for those who are <18 and those who are older. Use code similar to what you had in the previous exercise.
+
+*** =hint
+Suppose you wanted to add a new column `clothes` to the `test` set, then give all males the value `"pants"` and the others `"skirt"`:
+
+```
+test["clothes"] = "skirt"
+
+test["clothes"][test["Sex"] == "male"] = "pants"
+```
+
+*** =pre_exercise_code
+
+```{python}
+import pandas as pd
+train = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv")
+test = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/test.csv")
+```
+
+*** =sample_code
+
+```{python}
+# Create the column Child and assign to 'NaN'
+train["Child"] = float('NaN')
+
+# Assign 1 to passengers under 18, 0 to those 18 or older. Print the new column.
+
+
+
+
+# Print normalized Survival Rates for passengers under 18
+print(train["Survived"][train["Child"] == 1].value_counts(normalize = True))
+
+# Print normalized Survival Rates for passengers 18 or older
+
+
+```
+
+*** =solution
+
+```{python}
+# Create the column Child and assign to 'NaN'
+train["Child"] = float('NaN')
+
+# Assign 1 to passengers under 18, 0 to those 18 or older. Print the new column.
+train["Child"][train["Age"] < 18] = 1
+train["Child"][train["Age"] >= 18] = 0
+print(train["Child"])
+
+# Print normalized Survival Rates for passengers under 18
+print(train["Survived"][train["Child"] == 1].value_counts(normalize = True))
+
+# Print normalized Survival Rates for passengers 18 or older
+print(train["Survived"][train["Child"] == 0].value_counts(normalize = True))
+
+```
+
+*** =sct
+```{python}
+msg = "Remember to print the new column `Child`. It should be equal to 1 when the passenger's age is under 18 and 0 if the passenger's age is 18 or greater."
+test_function("print", 2,
+              not_called_msg = msg,
+              incorrect_msg = msg)
+
+msg = "Compute the survival proportions for those OVER 18. Refer to the code provided for passengers under 18."
+test_function("print", 3,
+              not_called_msg = msg,
+              incorrect_msg = msg)
+
+success_msg("Well done! As you can see from the survival proportions, age does certainly seem to play a role.")
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:f02305d182
+## First Prediction
+
+In one of the previous exercises you discovered that in your training set, females had over a 50% chance of surviving and males had less than a 50% chance of surviving. Hence, you could use this information for your first prediction: all females in the test set survive and all males in the test set die. 
+
+You use your test set for validating your predictions. You might have seen that contrary to the training set, the test set has no `Survived` column. You add such a column using your predicted values. Next, when uploading your results, Kaggle will use this variable (= your predictions) to score your performance. 
+
+*** =instructions
+- Create a variable `test_one`, identical to dataset `test`
+- Add an additional column, `Survived`, that you initialize to zero.
+- Use vector subsetting like in the previous exercise to set the value of `Survived` to 1 for observations whose `Sex` equals `"female"`.
+- Print the `Survived` column of predictions from the `test_one` dataset.
+
+*** =hint
+- To create a new variable, `y`, that is a copy of `x`, you can use `y = x`.
+- To initialize a new column `a` in a dataframe `data` to zero, you can use `data['a'] = 0`.
+- Have another look at the previous exercise if you're struggling with the third instruction.
+
+*** =pre_exercise_code
+
+```{python}
+import pandas as pd
+train = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv")
+test = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/test.csv")
+```
+
+*** =sample_code
+
+```{python}
+# Create a copy of test: test_one
+
+
+# Initialize a Survived column to 0
+
+
+# Set Survived to 1 if Sex equals "female" and print the `Survived` column from `test_one`
+```
+
+*** =solution
+
+```{python}
+# Create a copy of test: test_one
+test_one = test
+
+# Initialize a Survived column to 0
+test_one["Survived"] = 0
+
+# Set Survived to 1 if Sex equals "female"
+test_one["Survived"][test_one["Sex"] == "female"] = 1
+print(test_one.Survived)
+```
+
+*** =sct
+
+```{python}
+
+test_function("print",
+              not_called_msg = "Make sure to define the column `Survived` inside `test_one`",
+              incorrect_msg = "Make sure you are assigning 1 to female and 0 to male passengers")
+
+success_msg("Well done! If you want, you can already submit these first predictions to Kaggle [by uploading this csv file](http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/ch1_ex4_solution/my_solution.csv). In the next chapter, you will learn how to make more advanced predictions and create your own .csv file from Python.")
+```
