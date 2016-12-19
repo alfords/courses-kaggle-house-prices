@@ -88,7 +88,7 @@ In this course, you will learn how to apply machine learning techniques to predi
 import pandas as pd
 
 # Load the train and test datasets to create two DataFrames
-train_url = "http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv"
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv"
 train = pd.read_csv(train_url)
 
 test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
@@ -145,7 +145,7 @@ success_msg("Well done! Now that your data is loaded in, let's see if you can un
 ```
 
 --- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:5e47ef16d2
-## <<<New Exercise>>> 
+## Understanding your data 
 
 Before starting with the actual analysis, it's important to understand the structure of your data. Both `test` and `train` are DataFrame objects, the way pandas represent datasets. You can easily explore a DataFrame using the `.describe()` method. `.describe()` summarizes the columns/features of the DataFrame, including the count of observations, mean, max and so on. Another useful trick is to look at the dimensions of the DataFrame. This is done by requesting the `.shape` attribute of your DataFrame object. (ex. `your_data.shape`)
 
