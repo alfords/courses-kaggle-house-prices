@@ -54,7 +54,11 @@ success_msg("Great work!")
 
 --- type:NormalExercise lang:python xp:100 skills:2 key:672930f088
 ## Get the data with Pandas 
+For many the dream of owning a home doesn't include searching for the perfect basement ceiling height or the proximity to an east-west railroad. However, the 79 explanatory variables describing (almost) every aspect of residential homes used in the Kaggle House Price Competition show that there is much more that influences price negotiations than the number of bedrooms or a white-picket fence.
 
+In this course, you will learn how to apply machine learning techniques to predict the final price of each home using Python.
+
+"The potential for creative feature engineering provides a rich opportunity for fun and learning. This dataset lends itself to advanced regression techniques like random forests and gradient boosting with the popular XGBoost library. We encourage Kagglers to create benchmark code and tutorials on Kernels for community learning. Top kernels will be awarded swag prizes at the competition close." 
 
 *** =instructions
 - First, import the Pandas library as pd.
