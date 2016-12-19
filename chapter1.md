@@ -21,10 +21,6 @@ You can also execute Python commands straight in the console. This is a good way
 
 *** =pre_exercise_code
 ```{python}
-import pandas as pd
-test = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv")
-
-import numpy as np
 ```
 
 *** =sample_code
@@ -54,4 +50,49 @@ y = 6*9; print(y)
 
 
 success_msg("Great work!")
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:672930f088
+## Get the data with Pandas 
+
+
+*** =instructions
+- First, import the Pandas library as pd.
+- Load the test data similarly to how the train data is loaded.
+- Inspect the first couple rows of the loaded dataframes using the .head() method with the code provided.
+
+*** =hint
+- You can load in the training set with ```train = pd.read_csv(train_url)```
+- To print a variable to the console, use the print function on a new line.
+
+*** =pre_exercise_code
+```{python}
+
+```
+
+*** =sample_code
+```{python}
+# Import the Pandas library
+import pandas as pd
+
+# Load the train and test datasets to create two DataFrames
+train_url = "http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+#Print the `head` of the train and test dataframes
+print(train.head())
+print(test.head())
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
 ```
