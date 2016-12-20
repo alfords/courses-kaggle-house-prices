@@ -185,10 +185,9 @@ success_msg("Well done! Now move on and explore some of the features in more det
 ## Square Feet vs Lot Size  
 
 The object of the Kaggle competition is to is to predict the sale price of the properties listed in the test data set. Let's look at the training data set and see what we can gather from the data at a quick glace. We can see the sale price of the propeties listed in the training data set by using the standard bracket notation to select a single column of a DataFrame:
-```
-# absolute numbers
-train["SalePrice"]
-```
+
+`train["SalePrice"]`
+
 We can also look at some of the variabels to try to find obvious patterns. Let's start with the size of the house represented by `
 
 *** =instructions
