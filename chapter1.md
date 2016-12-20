@@ -184,12 +184,12 @@ success_msg("Well done! Now move on and explore some of the features in more det
 --- type:NormalExercise lang:python xp:100 skills:1 key:1eeaaeb294
 ## Square Feet vs Lot Size  
 
-The object of the Kaggle competition is to is to predict the sale price of the properties listed in the test data set. We can see the sale price of the propeties listed in the training data set by using the standard bracket notation to select a single column of a DataFrame:
-
+The object of the Kaggle competition is to is to predict the sale price of the properties listed in the test data set. Let's look at the training data set and see what we can gather from the data at a quick glace. We can see the sale price of the propeties listed in the training data set by using the standard bracket notation to select a single column of a DataFrame:
 ```
 # absolute numbers
 train["SalePrice"]
 ```
+We can also look at some of the variabels to try to find obvious patterns. Let's start with the size of the house represented by `
 
 *** =instructions
 - Calculate and print 
@@ -200,6 +200,7 @@ train["SalePrice"]
 *** =pre_exercise_code
 ```{python}
 import pandas as pd
+import matplotlib.pyplot as plt
 train = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv")
 test = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv")
 ```
@@ -210,6 +211,68 @@ test = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/cour
 # Sale Prices
 print()
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import datasets, linear_model
+
+
+# Fit the model
+model = ols("z ~ x + y", data).fit()
+
+# Print the summary
+print(model.summary())
+
+print("\nRetrieving manually the parameter estimates:")
+print(model._results.params)
+# should be array([-4.99754526,  3.00250049, -0.50514907])
+
+# Peform analysis of variance on fitted linear model
+anova_results = anova_lm(model)
+
+print('\nANOVA results')
+print(anova_results)
+
+plt.show()
+
+
+
+
+
+# Use only one feature
+diabetes_X = diabetes.data[:, np.newaxis, 2]
+
+# Split the data into training/testing sets
+diabetes_X_train = diabetes_X[:-20]
+diabetes_X_test = diabetes_X[-20:]
+
+# Split the targets into training/testing sets
+diabetes_y_train = diabetes.target[:-20]
+diabetes_y_test = diabetes.target[-20:]
+
+# Create linear regression object
+regr = linear_model.LinearRegression()
+
+# Train the model using the training sets
+regr.fit(diabetes_X_train, diabetes_y_train)
+
+# The coefficients
+print('Coefficients: \n', regr.coef_)
+# The mean squared error
+print("Mean squared error: %.2f"
+      % np.mean((regr.predict(diabetes_X_test) - diabetes_y_test) ** 2))
+# Explained variance score: 1 is perfect prediction
+print('Variance score: %.2f' % regr.score(diabetes_X_test, diabetes_y_test))
+
+# Plot outputs
+plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
+plt.plot(diabetes_X_test, regr.predict(diabetes_X_test), color='blue',
+         linewidth=3)
+
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
 
 ```
 
