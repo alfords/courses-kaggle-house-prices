@@ -21,6 +21,11 @@ You can also execute Python commands straight in the console. This is a good way
 
 *** =pre_exercise_code
 ```{python}
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
 ```
 
 *** =sample_code
