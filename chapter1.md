@@ -21,6 +21,7 @@ You can also execute Python commands straight in the console. This is a good way
 
 *** =pre_exercise_code
 ```{python}
+import pandas as pd
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv"
 train = pd.read_csv(train_url)
 
