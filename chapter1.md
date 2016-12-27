@@ -22,7 +22,7 @@ You can also execute Python commands straight in the console. This is a good way
 *** =pre_exercise_code
 ```{python}
 import pandas as pd
-train_url = "https://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv"
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
 train = pd.read_csv(train_url)
 
 test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
@@ -94,7 +94,7 @@ In this course, you will learn how to apply machine learning techniques to predi
 import pandas as pd
 
 # Load the train and test datasets to create two DataFrames
-train_url = "https://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv"
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
 train = pd.read_csv(train_url)
 
 test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
