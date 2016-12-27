@@ -65,6 +65,44 @@ test_function("print",2,
 
 success_msg("Awesome! See how the console shows the result of the Python code you submitted? Now that you're familiar with the interface, let's get down to business!")
 ```
+--- type:NormalExercise lang:python xp:100 skills:1 key:0fd82f2862
+## Test of complete code
+
+test
+
+
+*** =instructions
+- Test
+
+*** =hint
+- Just add a line of Python code that calculates the product of 6 and 9, just like the example in the sample code!
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+```
+
+*** =sample_code
+```{python}
+
+
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
+```
+
 
 --- type:NormalExercise lang:python xp:100 skills:2 key:672930f088
 ## Get the data with Pandas 
