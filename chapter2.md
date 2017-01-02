@@ -37,8 +37,8 @@ from itertools import product, chain
 
 *** =sample_code
 ```{python}
-# train = pd.read_csv("train.csv")
-# test = pd.read_csv("test.csv")
+
+
 
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
@@ -93,8 +93,8 @@ import xgboost as xgb
 from sklearn.svm import SVC
 from itertools import product, chain
 
-# train = pd.read_csv("train.csv")
-# test = pd.read_csv("test.csv")
+
+
 
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
@@ -201,8 +201,8 @@ import xgboost as xgb
 from sklearn.svm import SVC
 from itertools import product, chain
 
-# train = pd.read_csv("train.csv")
-# test = pd.read_csv("test.csv")
+
+
 
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
@@ -343,8 +343,8 @@ import xgboost as xgb
 from sklearn.svm import SVC
 from itertools import product, chain
 
-# train = pd.read_csv("train.csv")
-# test = pd.read_csv("test.csv")
+
+
 
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
@@ -527,8 +527,8 @@ import xgboost as xgb
 from sklearn.svm import SVC
 from itertools import product, chain
 
-# train = pd.read_csv("train.csv")
-# test = pd.read_csv("test.csv")
+
+
 
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
@@ -837,8 +837,8 @@ import xgboost as xgb
 from sklearn.svm import SVC
 from itertools import product, chain
 
-# train = pd.read_csv("train.csv")
-# test = pd.read_csv("test.csv")
+
+
 
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
@@ -1212,8 +1212,8 @@ import xgboost as xgb
 from sklearn.svm import SVC
 from itertools import product, chain
 
-# train = pd.read_csv("train.csv")
-# test = pd.read_csv("test.csv")
+
+
 
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
@@ -1641,8 +1641,8 @@ import xgboost as xgb
 from sklearn.svm import SVC
 from itertools import product, chain
 
-# train = pd.read_csv("train.csv")
-# test = pd.read_csv("test.csv")
+
+
 
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
