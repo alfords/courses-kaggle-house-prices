@@ -815,7 +815,6 @@ svm.fit(X_t, pc)
 
 *** =pre_exercise_code
 ```{python}
-```{python}
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as pl
