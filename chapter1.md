@@ -65,439 +65,2062 @@ test_function("print",2,
 
 success_msg("Awesome! See how the console shows the result of the Python code you submitted? Now that you're familiar with the interface, let's get down to business!")
 ```
---- type:NormalExercise lang:python xp:100 skills:1 key:0fd82f2862
-## Test of complete code
-
-test
+--- type:NormalExercise lang:python xp:100 skills:2 key:969061c67f
+## Read data
 
 
 *** =instructions
-- Test
 
 *** =hint
-- Just add a line of Python code that calculates the product of 6 and 9, just like the example in the sample code!
 
 *** =pre_exercise_code
 ```{python}
 import pandas as pd
-train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
-train = pd.read_csv(train_url)
-
-test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
-test = pd.read_csv(test_url)
-```
-
-*** =sample_code
-```{python}
-
-
-```
-
-*** =solution
-```{python}
-
-```
-
-*** =sct
-```{python}
-
-```
-
-
---- type:NormalExercise lang:python xp:100 skills:2 key:672930f088
-## Get the data with Pandas 
-For many the dream of owning a home doesn't include searching for the perfect basement ceiling height or the proximity to an east-west railroad. However, the 79 explanatory variables describing (almost) every aspect of residential homes used in the Kaggle House Price Competition show that there is much more that influences price negotiations than the number of bedrooms or a white-picket fence.
-
-In this course, you will learn how to apply machine learning techniques to predict the final price of each home using Python.
-
-"The potential for creative feature engineering provides a rich opportunity for fun and learning. This dataset lends itself to advanced regression techniques like random forests and gradient boosting with the popular XGBoost library. We encourage Kagglers to create benchmark code and tutorials on Kernels for community learning. Top kernels will be awarded swag prizes at the competition close." 
-
-*** =instructions
-- First, import the Pandas library as pd.
-- Load the test data similarly to how the train data is loaded.
-- Inspect the first couple rows of the loaded dataframes using the .head() method with the code provided.
-
-*** =hint
-- You can load in the training set with ```train = pd.read_csv(train_url)```
-- To print a variable to the console, use the print function on a new line.
-
-*** =pre_exercise_code
-```{python}
-
-```
-
-*** =sample_code
-```{python}
-# Import the Pandas library
-import pandas as pd
-
-# Load the train and test datasets to create two DataFrames
-train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
-train = pd.read_csv(train_url)
-
-test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
-test = pd.read_csv(test_url)
-
-#Print the `head` of the train and test dataframes
-print(train.head())
-print(test.head())
-```
-
-*** =solution
-```{python}
-# Import the Pandas library
-import pandas as pd
-
-# Load the train and test datasets to create two DataFrames
-train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
-train = pd.read_csv(train_url)
-
-test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
-test = pd.read_csv(test_url)
-
-#Print the `head` of the train and test dataframes
-print(train.head())
-print(test.head())
-```
-
-*** =sct
-```{python}
-msg = "Have you correctly imported the `pandas` package? Use the alias `pd`."
-test_import("pandas",  not_imported_msg = msg,  incorrect_as_msg = msg)
-
-msg = "Do not touch the code that specifies the URLs of the training and test set csvs."
-test_object("train_url", undefined_msg = msg, incorrect_msg = msg)
-test_object("test_url", undefined_msg = msg, incorrect_msg = msg)
-
-msg = "Make sure you are using the `read_csv()` function correctly"
-test_function("pandas.read_csv", 1,
-              args=None,
-              not_called_msg = msg,
-              incorrect_msg = msg,)
-test_function("pandas.read_csv", 2,
-              args=None,
-              not_called_msg = msg,
-              incorrect_msg = msg)
-
-#msg = "Don't forget to print the first few rows of `train` with the `.head()` method"
-#test_function("print", 1, not_called_msg = msg, incorrect_msg = msg)
-
-#msg = "Don't forget to print the first few rows of `test` with the `.head()` method"
-#test_function("print", 2, not_called_msg = msg, incorrect_msg = msg)
-
-success_msg("Well done! Now that your data is loaded in, let's see if you can understand it.")
-```
-
---- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:5e47ef16d2
-## Understanding your data 
-
-Before starting with the actual analysis, it's important to understand the structure of your data. Both `test` and `train` are DataFrame objects, the way pandas represent datasets. You can easily explore a DataFrame using the `.describe()` method. `.describe()` summarizes the columns/features of the DataFrame, including the count of observations, mean, max and so on. Another useful trick is to look at the dimensions of the DataFrame. This is done by requesting the `.shape` attribute of your DataFrame object. (ex. `your_data.shape`)
-
-The training and test set are already available in the workspace, as `train` and `test`. Apply `.describe()` method and print the `.shape` attribute of the training set. Which of the following statements is correct?
-
-*** =instructions
-- The training set has 1460 observations and 81 variables, count for LotFrontage is 1233.
-- The training set has 1459 observations and 80 variables, count for LotFrontage is 1459.
-- The testing set has 1459 observations and 81 variables, count for LotFrontage is 1234.
-- The testing set has 1459 observations and 80 variables, count for LotFrontage is 1232.
-
-*** =hint
-To see the description of the `test` variable try `test.describe()`.
-
-*** =pre_exercise_code
-```{python}
-import pandas as pd
-train = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv")
-test = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv")
-```
-
-*** =sct
-
-```{python}
-
-msg1 = "Incorrect. Maybe have a look at the hint."
-msg2 = "Wrong, try again. Maybe have a look at the hint."
-msg3 = "Not so good... Maybe have a look at the hint."
-msg4 = "Great job!"
-test_mc(correct = 4, msgs = [msg1, msg2, msg3, msg4])
-
-success_msg("Well done! Now move on and explore some of the features in more detail.")
-
-```
-
---- type:NormalExercise lang:python xp:100 skills:1 key:1eeaaeb294
-## Square Feet vs Lot Size  
-
-The object of the Kaggle competition is to is to predict the sale price of the properties listed in the test data set. Let's look at the training data set and see what we can gather from the data at a quick glace. We can see the sale price of the propeties listed in the training data set by using the standard bracket notation to select a single column of a DataFrame:
-
-`train["SalePrice"]`
-
-We can also look at some of the variabels to try to find obvious patterns. Let's start with the size of the house represented by `
-
-*** =instructions
-- Calculate and print 
-
-*** =hint
-- hint
-
-*** =pre_exercise_code
-```{python}
-import pandas as pd
-import matplotlib.pyplot as plt
-train = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv")
-test = pd.read_csv("https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv")
-```
-
-*** =sample_code
-```{python}
-
-# Sale Prices
-print()
-
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn import datasets, linear_model
+import matplotlib.pyplot as pl
+from sklearn.linear_model import Lasso
+import warnings
+warnings.filterwarnings("ignore")
+# import seaborn as sns
+from scipy.stats import skew
+from scipy.stats.stats import pearsonr
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import make_scorer, mean_squared_error
+
+from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
+# from sklearn.model_selection import cross_val_score
 
 
-# Fit the model
-model = ols("z ~ x + y", data).fit()
+from operator import itemgetter
+import itertools
+import xgboost as xgb
+from sklearn.svm import SVC
+from itertools import product, chain
 
-# Print the summary
-print(model.summary())
-
-print("\nRetrieving manually the parameter estimates:")
-print(model._results.params)
-# should be array([-4.99754526,  3.00250049, -0.50514907])
-
-# Peform analysis of variance on fitted linear model
-anova_results = anova_lm(model)
-
-print('\nANOVA results')
-print(anova_results)
-
-plt.show()
-
-
-
-
-
-# Use only one feature
-diabetes_X = diabetes.data[:, np.newaxis, 2]
-
-# Split the data into training/testing sets
-diabetes_X_train = diabetes_X[:-20]
-diabetes_X_test = diabetes_X[-20:]
-
-# Split the targets into training/testing sets
-diabetes_y_train = diabetes.target[:-20]
-diabetes_y_test = diabetes.target[-20:]
-
-# Create linear regression object
-regr = linear_model.LinearRegression()
-
-# Train the model using the training sets
-regr.fit(diabetes_X_train, diabetes_y_train)
-
-# The coefficients
-print('Coefficients: \n', regr.coef_)
-# The mean squared error
-print("Mean squared error: %.2f"
-      % np.mean((regr.predict(diabetes_X_test) - diabetes_y_test) ** 2))
-# Explained variance score: 1 is perfect prediction
-print('Variance score: %.2f' % regr.score(diabetes_X_test, diabetes_y_test))
-
-# Plot outputs
-plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
-plt.plot(diabetes_X_test, regr.predict(diabetes_X_test), color='blue',
-         linewidth=3)
-
-plt.xticks(())
-plt.yticks(())
-
-plt.show()
-
-```
-
-*** =solution
-```{python}
-
-# Sale Prices
-print(train["SalePrice"])
-
-```
-
-*** =sct
-
-```{python}
-msg = "Make sure you are using the bracket method correctly."
-test_function("print", 1,
-              not_called_msg= msg,
-              incorrect_msg = msg)
-
-success_msg("Well done!.")
-
-```
-
---- type:NormalExercise lang:python xp:100 skills:2 key:b8f71cf4de
-## Does age play a role?
-
-Another variable that could influence survival is age; since it's probable that children were saved first. You can test this by creating a new column with a categorical variable `Child`. `Child` will take the value 1 in cases where age is less than 18, and a value of 0 in cases where age is greater than or equal to 18. 
-
-To add this new variable you need to do two things (i) create a new column, and (ii) provide the values for each observation (i.e., row) based on the age of the passenger.
-
-Adding a new column with Pandas in Python is easy and can be done via the following syntax:
-
-```
-your_data["new_var"] = 0
-```
-
-This code would create a new column in the `train` DataFrame titled `new_var` with `0` for each observation.
-
-To set the values based on the age of the passenger, you make use of a boolean test inside the square bracket operator. With the `[]`-operator you create a subset of rows and assign a value to a certain variable of that subset of observations. For example,
-
-```
-train["new_var"][train["Fare"] > 10] = 1
-```
-
-would give a value of `1` to the variable `new_var` for the subset of passengers whose fares greater than 10. Remember that `new_var` has a value of `0` for all other values (including missing values).
-
-A new column called `Child` in the `train` data frame has been created for you that takes the value `NaN` for all observations.
-
-*** =instructions
-- Set the values of `Child` to `1` is the passenger's age is less than 18 years. 
-- Then assign the value `0` to observations where the passenger is greater than or equal to 18 years in the new `Child` column. 
-- Compare the normalized survival rates for those who are <18 and those who are older. Use code similar to what you had in the previous exercise.
-
-*** =hint
-Suppose you wanted to add a new column `clothes` to the `test` set, then give all males the value `"pants"` and the others `"skirt"`:
-
-```
-test["clothes"] = "skirt"
-
-test["clothes"][test["Sex"] == "male"] = "pants"
-```
-
-*** =pre_exercise_code
-
-```{python}
-import pandas as pd
-train = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv")
-test = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/test.csv")
 ```
 
 *** =sample_code
-
 ```{python}
-# Create the column Child and assign to 'NaN'
-train["Child"] = float('NaN')
-
-# Assign 1 to passengers under 18, 0 to those 18 or older. Print the new column.
 
 
 
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
 
-# Print normalized Survival Rates for passengers under 18
-print(train["Survived"][train["Child"] == 1].value_counts(normalize = True))
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
 
-# Print normalized Survival Rates for passengers 18 or older
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
 
 
 ```
 
 *** =solution
-
 ```{python}
-# Create the column Child and assign to 'NaN'
-train["Child"] = float('NaN')
-
-# Assign 1 to passengers under 18, 0 to those 18 or older. Print the new column.
-train["Child"][train["Age"] < 18] = 1
-train["Child"][train["Age"] >= 18] = 0
-print(train["Child"])
-
-# Print normalized Survival Rates for passengers under 18
-print(train["Survived"][train["Child"] == 1].value_counts(normalize = True))
-
-# Print normalized Survival Rates for passengers 18 or older
-print(train["Survived"][train["Child"] == 0].value_counts(normalize = True))
 
 ```
 
 *** =sct
 ```{python}
-msg = "Remember to print the new column `Child`. It should be equal to 1 when the passenger's age is under 18 and 0 if the passenger's age is 18 or greater."
-test_function("print", 2,
-              not_called_msg = msg,
-              incorrect_msg = msg)
 
-msg = "Compute the survival proportions for those OVER 18. Refer to the code provided for passengers under 18."
-test_function("print", 3,
-              not_called_msg = msg,
-              incorrect_msg = msg)
-
-success_msg("Well done! As you can see from the survival proportions, age does certainly seem to play a role.")
 ```
 
---- type:NormalExercise lang:python xp:100 skills:2 key:f02305d182
-## First Prediction
+--- type:NormalExercise lang:python xp:100 skills:2 key:c9e0e937d6
+## Removing NA values
 
-In one of the previous exercises you discovered that in your training set, females had over a 50% chance of surviving and males had less than a 50% chance of surviving. Hence, you could use this information for your first prediction: all females in the test set survive and all males in the test set die. 
-
-You use your test set for validating your predictions. You might have seen that contrary to the training set, the test set has no `Survived` column. You add such a column using your predicted values. Next, when uploading your results, Kaggle will use this variable (= your predictions) to score your performance. 
 
 *** =instructions
-- Create a variable `test_one`, identical to dataset `test`
-- Add an additional column, `Survived`, that you initialize to zero.
-- Use vector subsetting like in the previous exercise to set the value of `Survived` to 1 for observations whose `Sex` equals `"female"`.
-- Print the `Survived` column of predictions from the `test_one` dataset.
 
 *** =hint
-- To create a new variable, `y`, that is a copy of `x`, you can use `y = x`.
-- To initialize a new column `a` in a dataframe `data` to zero, you can use `data['a'] = 0`.
-- Have another look at the previous exercise if you're struggling with the third instruction.
 
 *** =pre_exercise_code
-
 ```{python}
 import pandas as pd
-train = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/train.csv")
-test = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/test.csv")
+import numpy as np
+import matplotlib.pyplot as pl
+from sklearn.linear_model import Lasso
+import warnings
+warnings.filterwarnings("ignore")
+# import seaborn as sns
+from scipy.stats import skew
+from scipy.stats.stats import pearsonr
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import make_scorer, mean_squared_error
+
+from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
+# from sklearn.model_selection import cross_val_score
+
+
+from operator import itemgetter
+import itertools
+import xgboost as xgb
+from sklearn.svm import SVC
+from itertools import product, chain
+
+
+
+
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
+
 ```
 
 *** =sample_code
-
 ```{python}
-# Create a copy of test: test_one
+warnings.simplefilter('ignore', np.RankWarning)
+x = all_data.loc[np.logical_not(all_data["LotFrontage"].isnull()), "LotArea"]
+y = all_data.loc[np.logical_not(all_data["LotFrontage"].isnull()), "LotFrontage"]
+
+t = (x <= 25000) & (y <= 150) #Extract Values  
+p = np.polyfit(x[t], y[t], 1)
+
+all_data.loc[all_data['LotFrontage'].isnull(), 'LotFrontage'] = np.polyval(p, all_data.loc[all_data['LotFrontage'].isnull(), 'LotArea'])
 
 
-# Initialize a Survived column to 0
+all_data = all_data.fillna({
+    'Alley' : 'NoAlley',
+    'MasVnrType': 'None',
+    'FireplaceQu': 'NoFireplace',
+    'GarageType': 'NoGarage',
+    'GarageFinish': 'NoGarage',
+    'GarageQual': 'NoGarage',
+    'GarageCond': 'NoGarage',
+    'BsmtFullBath': 0,
+    'BsmtHalfBath': 0,
+    'BsmtQual' : 'NoBsmt',
+    'BsmtCond' : 'NoBsmt',
+    'BsmtExposure' : 'NoBsmt',
+    'BsmtFinType1' : 'NoBsmt',
+    'BsmtFinType2' : 'NoBsmt',
+    'KitchenQual' : 'TA',
+    'MSZoning' : 'RL',
+    'Utilities' : 'AllPub',
+    'Exterior1st' : 'VinylSd',
+    'Exterior2nd'   : 'VinylSd',
+    'Functional' : 'Typ',
+    'PoolQC' : 'NoPool',
+    'Fence' : 'NoFence',
+    'MiscFeature' : 'None',
+    'Electrical' : 'SBrkr'
+     
+})
 
 
-# Set Survived to 1 if Sex equals "female" and print the `Survived` column from `test_one`
+all_data.loc[all_data.SaleCondition.isnull(), 'SaleCondition'] = 'Normal'
+all_data.loc[all_data.SaleCondition.isnull(), 'SaleType'] = 'WD'
+all_data.loc[all_data.MasVnrType == 'None', 'MasVnrArea'] = 0
+all_data.loc[all_data.BsmtFinType1=='NoBsmt', 'BsmtFinSF1'] = 0
+all_data.loc[all_data.BsmtFinType2=='NoBsmt', 'BsmtFinSF2'] = 0
+all_data.loc[all_data.BsmtFinSF1.isnull(), 'BsmtFinSF1'] = all_data.BsmtFinSF1.median()
+all_data.loc[all_data.BsmtQual=='NoBsmt', 'BsmtUnfSF'] = 0
+all_data.loc[all_data.BsmtUnfSF.isnull(), 'BsmtUnfSF'] = all_data.BsmtUnfSF.median()
+all_data.loc[all_data.BsmtQual=='NoBsmt', 'TotalBsmtSF'] = 0
+
 ```
 
 *** =solution
-
 ```{python}
-# Create a copy of test: test_one
-test_one = test
 
-# Initialize a Survived column to 0
-test_one["Survived"] = 0
-
-# Set Survived to 1 if Sex equals "female"
-test_one["Survived"][test_one["Sex"] == "female"] = 1
-print(test_one.Survived)
 ```
 
 *** =sct
-
 ```{python}
 
-test_function("print",
-              not_called_msg = "Make sure to define the column `Survived` inside `test_one`",
-              incorrect_msg = "Make sure you are assigning 1 to female and 0 to male passengers")
+```
 
-success_msg("Well done! If you want, you can already submit these first predictions to Kaggle [by uploading this csv file](http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/ch1_ex4_solution/my_solution.csv). In the next chapter, you will learn how to make more advanced predictions and create your own .csv file from Python.")
+--- type:NormalExercise lang:python xp:100 skills:2 key:12bc8645ae
+## Ordering Categorical data
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as pl
+from sklearn.linear_model import Lasso
+import warnings
+warnings.filterwarnings("ignore")
+# import seaborn as sns
+from scipy.stats import skew
+from scipy.stats.stats import pearsonr
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import make_scorer, mean_squared_error
+
+from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
+# from sklearn.model_selection import cross_val_score
+
+
+from operator import itemgetter
+import itertools
+import xgboost as xgb
+from sklearn.svm import SVC
+from itertools import product, chain
+
+
+
+
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
+
+```
+
+*** =sample_code
+```{python}
+# only one is null and it has type Detchd
+all_data.loc[all_data['GarageArea'].isnull(), 'GarageArea'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageArea'].mean()
+all_data.loc[all_data['GarageCars'].isnull(), 'GarageCars'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageCars'].median()
+
+
+# where we have order we will use numeric
+all_data = all_data.replace({'Utilities': {'AllPub': 1, 'NoSeWa': 0, 'NoSewr': 0, 'ELO': 0},
+                             'Street': {'Pave': 1, 'Grvl': 0 },
+                             'FireplaceQu': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoFireplace': 0 
+                                            },
+                             'Fence': {'GdPrv': 2, 
+                                       'GdWo': 2, 
+                                       'MnPrv': 1, 
+                                       'MnWw': 1,
+                                       'NoFence': 0},
+                             'ExterQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'ExterCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'BsmtQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'BsmtExposure': {'Gd': 3, 
+                                            'Av': 2, 
+                                            'Mn': 1,
+                                            'No': 0,
+                                            'NoBsmt': 0},
+                             'BsmtCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'GarageQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'GarageCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'KitchenQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1},
+                             'Functional': {'Typ': 0,
+                                            'Min1': 1,
+                                            'Min2': 1,
+                                            'Mod': 2,
+                                            'Maj1': 3,
+                                            'Maj2': 4,
+                                            'Sev': 5,
+                                            'Sal': 6}                             
+                            })
+
+
+all_data = all_data.replace({'CentralAir': {'Y': 1, 
+                                            'N': 0}})
+all_data = all_data.replace({'PavedDrive': {'Y': 1, 
+                                            'P': 0,
+                                            'N': 0}})
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:159280e6e4
+## New features 
+
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as pl
+from sklearn.linear_model import Lasso
+import warnings
+warnings.filterwarnings("ignore")
+# import seaborn as sns
+from scipy.stats import skew
+from scipy.stats.stats import pearsonr
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import make_scorer, mean_squared_error
+
+from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
+# from sklearn.model_selection import cross_val_score
+
+
+from operator import itemgetter
+import itertools
+import xgboost as xgb
+from sklearn.svm import SVC
+from itertools import product, chain
+
+
+
+
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
+
+# only one is null and it has type Detchd
+all_data.loc[all_data['GarageArea'].isnull(), 'GarageArea'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageArea'].mean()
+all_data.loc[all_data['GarageCars'].isnull(), 'GarageCars'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageCars'].median()
+
+
+# where we have order we will use numeric
+all_data = all_data.replace({'Utilities': {'AllPub': 1, 'NoSeWa': 0, 'NoSewr': 0, 'ELO': 0},
+                             'Street': {'Pave': 1, 'Grvl': 0 },
+                             'FireplaceQu': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoFireplace': 0 
+                                            },
+                             'Fence': {'GdPrv': 2, 
+                                       'GdWo': 2, 
+                                       'MnPrv': 1, 
+                                       'MnWw': 1,
+                                       'NoFence': 0},
+                             'ExterQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'ExterCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'BsmtQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'BsmtExposure': {'Gd': 3, 
+                                            'Av': 2, 
+                                            'Mn': 1,
+                                            'No': 0,
+                                            'NoBsmt': 0},
+                             'BsmtCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'GarageQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'GarageCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'KitchenQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1},
+                             'Functional': {'Typ': 0,
+                                            'Min1': 1,
+                                            'Min2': 1,
+                                            'Mod': 2,
+                                            'Maj1': 3,
+                                            'Maj2': 4,
+                                            'Sev': 5,
+                                            'Sal': 6}                             
+                            })
+
+
+all_data = all_data.replace({'CentralAir': {'Y': 1, 
+                                            'N': 0}})
+all_data = all_data.replace({'PavedDrive': {'Y': 1, 
+                                            'P': 0,
+                                            'N': 0}})
+```
+
+*** =sample_code
+```{python}
+# NEW FEATURES
+
+newer_dwelling = all_data.MSSubClass.replace({20: 1, 
+                                            30: 0, 
+                                            40: 0, 
+                                            45: 0,
+                                            50: 0, 
+                                            60: 1,
+                                            70: 0,
+                                            75: 0,
+                                            80: 0,
+                                            85: 0,
+                                            90: 0,
+                                           120: 1,
+                                           150: 0,
+                                           160: 0,
+                                           180: 0,
+                                           190: 0})
+newer_dwelling.name = 'newer_dwelling'
+
+
+all_data = all_data.replace({'MSSubClass': {20: 'SubClass_20', 
+                                            30: 'SubClass_30', 
+                                            40: 'SubClass_40', 
+                                            45: 'SubClass_45',
+                                            50: 'SubClass_50', 
+                                            60: 'SubClass_60',
+                                            70: 'SubClass_70',
+                                            75: 'SubClass_75',
+                                            80: 'SubClass_80',
+                                            85: 'SubClass_85',
+                                            90: 'SubClass_90',
+                                           120: 'SubClass_120',
+                                           150: 'SubClass_150',
+                                           160: 'SubClass_160',
+                                           180: 'SubClass_180',
+                                           190: 'SubClass_190'}})
+
+
+
+
+
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:9e450f74d9
+## New Features 2
+
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as pl
+from sklearn.linear_model import Lasso
+import warnings
+warnings.filterwarnings("ignore")
+# import seaborn as sns
+from scipy.stats import skew
+from scipy.stats.stats import pearsonr
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import make_scorer, mean_squared_error
+
+from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
+# from sklearn.model_selection import cross_val_score
+
+
+from operator import itemgetter
+import itertools
+import xgboost as xgb
+from sklearn.svm import SVC
+from itertools import product, chain
+
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
+
+# only one is null and it has type Detchd
+all_data.loc[all_data['GarageArea'].isnull(), 'GarageArea'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageArea'].mean()
+all_data.loc[all_data['GarageCars'].isnull(), 'GarageCars'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageCars'].median()
+
+
+# where we have order we will use numeric
+all_data = all_data.replace({'Utilities': {'AllPub': 1, 'NoSeWa': 0, 'NoSewr': 0, 'ELO': 0},
+                             'Street': {'Pave': 1, 'Grvl': 0 },
+                             'FireplaceQu': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoFireplace': 0 
+                                            },
+                             'Fence': {'GdPrv': 2, 
+                                       'GdWo': 2, 
+                                       'MnPrv': 1, 
+                                       'MnWw': 1,
+                                       'NoFence': 0},
+                             'ExterQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'ExterCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'BsmtQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'BsmtExposure': {'Gd': 3, 
+                                            'Av': 2, 
+                                            'Mn': 1,
+                                            'No': 0,
+                                            'NoBsmt': 0},
+                             'BsmtCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'GarageQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'GarageCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'KitchenQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1},
+                             'Functional': {'Typ': 0,
+                                            'Min1': 1,
+                                            'Min2': 1,
+                                            'Mod': 2,
+                                            'Maj1': 3,
+                                            'Maj2': 4,
+                                            'Sev': 5,
+                                            'Sal': 6}                             
+                            })
+
+
+all_data = all_data.replace({'CentralAir': {'Y': 1, 
+                                            'N': 0}})
+all_data = all_data.replace({'PavedDrive': {'Y': 1, 
+                                            'P': 0,
+                                            'N': 0}})
+                                            
+
+# NEW FEATURES
+
+newer_dwelling = all_data.MSSubClass.replace({20: 1, 
+                                            30: 0, 
+                                            40: 0, 
+                                            45: 0,
+                                            50: 0, 
+                                            60: 1,
+                                            70: 0,
+                                            75: 0,
+                                            80: 0,
+                                            85: 0,
+                                            90: 0,
+                                           120: 1,
+                                           150: 0,
+                                           160: 0,
+                                           180: 0,
+                                           190: 0})
+newer_dwelling.name = 'newer_dwelling'
+
+
+all_data = all_data.replace({'MSSubClass': {20: 'SubClass_20', 
+                                            30: 'SubClass_30', 
+                                            40: 'SubClass_40', 
+                                            45: 'SubClass_45',
+                                            50: 'SubClass_50', 
+                                            60: 'SubClass_60',
+                                            70: 'SubClass_70',
+                                            75: 'SubClass_75',
+                                            80: 'SubClass_80',
+                                            85: 'SubClass_85',
+                                            90: 'SubClass_90',
+                                           120: 'SubClass_120',
+                                           150: 'SubClass_150',
+                                           160: 'SubClass_160',
+                                           180: 'SubClass_180',
+                                           190: 'SubClass_190'}})
+
+
+```
+
+*** =sample_code
+```{python}
+# The idea is good quality should rise price, poor quality - reduce price
+overall_poor_qu = all_data.OverallQual.copy()
+overall_poor_qu = 5 - overall_poor_qu
+overall_poor_qu[overall_poor_qu<0] = 0
+overall_poor_qu.name = 'overall_poor_qu'
+
+overall_good_qu = all_data.OverallQual.copy()
+overall_good_qu = overall_good_qu - 5
+overall_good_qu[overall_good_qu<0] = 0
+overall_good_qu.name = 'overall_good_qu'
+
+overall_poor_cond = all_data.OverallCond.copy()
+overall_poor_cond = 5 - overall_poor_cond
+overall_poor_cond[overall_poor_cond<0] = 0
+overall_poor_cond.name = 'overall_poor_cond'
+
+overall_good_cond = all_data.OverallCond.copy()
+overall_good_cond = overall_good_cond - 5
+overall_good_cond[overall_good_cond<0] = 0
+overall_good_cond.name = 'overall_good_cond'
+
+exter_poor_qu = all_data.ExterQual.copy()
+exter_poor_qu[exter_poor_qu<3] = 1
+exter_poor_qu[exter_poor_qu>=3] = 0
+exter_poor_qu.name = 'exter_poor_qu'
+
+exter_good_qu = all_data.ExterQual.copy()
+exter_good_qu[exter_good_qu<=3] = 0
+exter_good_qu[exter_good_qu>3] = 1
+exter_good_qu.name = 'exter_good_qu'
+
+exter_poor_cond = all_data.ExterCond.copy()
+exter_poor_cond[exter_poor_cond<3] = 1
+exter_poor_cond[exter_poor_cond>=3] = 0
+exter_poor_cond.name = 'exter_poor_cond'
+
+exter_good_cond = all_data.ExterCond.copy()
+exter_good_cond[exter_good_cond<=3] = 0
+exter_good_cond[exter_good_cond>3] = 1
+exter_good_cond.name = 'exter_good_cond'
+
+bsmt_poor_cond = all_data.BsmtCond.copy()
+bsmt_poor_cond[bsmt_poor_cond<3] = 1
+bsmt_poor_cond[bsmt_poor_cond>=3] = 0
+bsmt_poor_cond.name = 'bsmt_poor_cond'
+
+bsmt_good_cond = all_data.BsmtCond.copy()
+bsmt_good_cond[bsmt_good_cond<=3] = 0
+bsmt_good_cond[bsmt_good_cond>3] = 1
+bsmt_good_cond.name = 'bsmt_good_cond'
+
+garage_poor_qu = all_data.GarageQual.copy()
+garage_poor_qu[garage_poor_qu<3] = 1
+garage_poor_qu[garage_poor_qu>=3] = 0
+garage_poor_qu.name = 'garage_poor_qu'
+
+garage_good_qu = all_data.GarageQual.copy()
+garage_good_qu[garage_good_qu<=3] = 0
+garage_good_qu[garage_good_qu>3] = 1
+garage_good_qu.name = 'garage_good_qu'
+
+garage_poor_cond = all_data.GarageCond.copy()
+garage_poor_cond[garage_poor_cond<3] = 1
+garage_poor_cond[garage_poor_cond>=3] = 0
+garage_poor_cond.name = 'garage_poor_cond'
+
+garage_good_cond = all_data.GarageCond.copy()
+garage_good_cond[garage_good_cond<=3] = 0
+garage_good_cond[garage_good_cond>3] = 1
+garage_good_cond.name = 'garage_good_cond'
+
+kitchen_poor_qu = all_data.KitchenQual.copy()
+kitchen_poor_qu[kitchen_poor_qu<3] = 1
+kitchen_poor_qu[kitchen_poor_qu>=3] = 0
+kitchen_poor_qu.name = 'kitchen_poor_qu'
+
+kitchen_good_qu = all_data.KitchenQual.copy()
+kitchen_good_qu[kitchen_good_qu<=3] = 0
+kitchen_good_qu[kitchen_good_qu>3] = 1
+kitchen_good_qu.name = 'kitchen_good_qu'
+
+qu_list = pd.concat((overall_poor_qu, overall_good_qu, overall_poor_cond, overall_good_cond, exter_poor_qu,
+                     exter_good_qu, exter_poor_cond, exter_good_cond, bsmt_poor_cond, bsmt_good_cond, garage_poor_qu,
+                     garage_good_qu, garage_poor_cond, garage_good_cond, kitchen_poor_qu, kitchen_good_qu), axis=1)
+
+
+
+bad_heating = all_data.HeatingQC.replace({'Ex': 0, 
+                                          'Gd': 0, 
+                                          'TA': 0, 
+                                          'Fa': 1,
+                                          'Po': 1})
+bad_heating.name = 'bad_heating'
+                                          
+MasVnrType_Any = all_data.MasVnrType.replace({'BrkCmn': 1,
+                                              'BrkFace': 1,
+                                              'CBlock': 1,
+                                              'Stone': 1,
+                                              'None': 0})
+MasVnrType_Any.name = 'MasVnrType_Any'
+
+SaleCondition_PriceDown = all_data.SaleCondition.replace({'Abnorml': 1,
+                                                          'Alloca': 1,
+                                                          'AdjLand': 1,
+                                                          'Family': 1,
+                                                          'Normal': 0,
+                                                          'Partial': 0})
+SaleCondition_PriceDown.name = 'SaleCondition_PriceDown'
+
+Neighborhood_Good = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Neighborhood_Good'])
+Neighborhood_Good[all_data.Neighborhood=='NridgHt'] = 1
+Neighborhood_Good[all_data.Neighborhood=='Crawfor'] = 1
+Neighborhood_Good[all_data.Neighborhood=='StoneBr'] = 1
+Neighborhood_Good[all_data.Neighborhood=='Somerst'] = 1
+Neighborhood_Good[all_data.Neighborhood=='NoRidge'] = 1
+
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:ff7dfac186
+## Training
+
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as pl
+from sklearn.linear_model import Lasso
+import warnings
+warnings.filterwarnings("ignore")
+# import seaborn as sns
+from scipy.stats import skew
+from scipy.stats.stats import pearsonr
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import make_scorer, mean_squared_error
+
+from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
+# from sklearn.model_selection import cross_val_score
+
+
+from operator import itemgetter
+import itertools
+import xgboost as xgb
+from sklearn.svm import SVC
+from itertools import product, chain
+
+
+
+
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
+
+# only one is null and it has type Detchd
+all_data.loc[all_data['GarageArea'].isnull(), 'GarageArea'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageArea'].mean()
+all_data.loc[all_data['GarageCars'].isnull(), 'GarageCars'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageCars'].median()
+
+
+# where we have order we will use numeric
+all_data = all_data.replace({'Utilities': {'AllPub': 1, 'NoSeWa': 0, 'NoSewr': 0, 'ELO': 0},
+                             'Street': {'Pave': 1, 'Grvl': 0 },
+                             'FireplaceQu': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoFireplace': 0 
+                                            },
+                             'Fence': {'GdPrv': 2, 
+                                       'GdWo': 2, 
+                                       'MnPrv': 1, 
+                                       'MnWw': 1,
+                                       'NoFence': 0},
+                             'ExterQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'ExterCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'BsmtQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'BsmtExposure': {'Gd': 3, 
+                                            'Av': 2, 
+                                            'Mn': 1,
+                                            'No': 0,
+                                            'NoBsmt': 0},
+                             'BsmtCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'GarageQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'GarageCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'KitchenQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1},
+                             'Functional': {'Typ': 0,
+                                            'Min1': 1,
+                                            'Min2': 1,
+                                            'Mod': 2,
+                                            'Maj1': 3,
+                                            'Maj2': 4,
+                                            'Sev': 5,
+                                            'Sal': 6}                             
+                            })
+
+
+all_data = all_data.replace({'CentralAir': {'Y': 1, 
+                                            'N': 0}})
+all_data = all_data.replace({'PavedDrive': {'Y': 1, 
+                                            'P': 0,
+                                            'N': 0}})
+                                            
+
+# NEW FEATURES
+
+newer_dwelling = all_data.MSSubClass.replace({20: 1, 
+                                            30: 0, 
+                                            40: 0, 
+                                            45: 0,
+                                            50: 0, 
+                                            60: 1,
+                                            70: 0,
+                                            75: 0,
+                                            80: 0,
+                                            85: 0,
+                                            90: 0,
+                                           120: 1,
+                                           150: 0,
+                                           160: 0,
+                                           180: 0,
+                                           190: 0})
+newer_dwelling.name = 'newer_dwelling'
+
+
+all_data = all_data.replace({'MSSubClass': {20: 'SubClass_20', 
+                                            30: 'SubClass_30', 
+                                            40: 'SubClass_40', 
+                                            45: 'SubClass_45',
+                                            50: 'SubClass_50', 
+                                            60: 'SubClass_60',
+                                            70: 'SubClass_70',
+                                            75: 'SubClass_75',
+                                            80: 'SubClass_80',
+                                            85: 'SubClass_85',
+                                            90: 'SubClass_90',
+                                           120: 'SubClass_120',
+                                           150: 'SubClass_150',
+                                           160: 'SubClass_160',
+                                           180: 'SubClass_180',
+                                           190: 'SubClass_190'}})
+
+# The idea is good quality should rise price, poor quality - reduce price
+overall_poor_qu = all_data.OverallQual.copy()
+overall_poor_qu = 5 - overall_poor_qu
+overall_poor_qu[overall_poor_qu<0] = 0
+overall_poor_qu.name = 'overall_poor_qu'
+
+overall_good_qu = all_data.OverallQual.copy()
+overall_good_qu = overall_good_qu - 5
+overall_good_qu[overall_good_qu<0] = 0
+overall_good_qu.name = 'overall_good_qu'
+
+overall_poor_cond = all_data.OverallCond.copy()
+overall_poor_cond = 5 - overall_poor_cond
+overall_poor_cond[overall_poor_cond<0] = 0
+overall_poor_cond.name = 'overall_poor_cond'
+
+overall_good_cond = all_data.OverallCond.copy()
+overall_good_cond = overall_good_cond - 5
+overall_good_cond[overall_good_cond<0] = 0
+overall_good_cond.name = 'overall_good_cond'
+
+exter_poor_qu = all_data.ExterQual.copy()
+exter_poor_qu[exter_poor_qu<3] = 1
+exter_poor_qu[exter_poor_qu>=3] = 0
+exter_poor_qu.name = 'exter_poor_qu'
+
+exter_good_qu = all_data.ExterQual.copy()
+exter_good_qu[exter_good_qu<=3] = 0
+exter_good_qu[exter_good_qu>3] = 1
+exter_good_qu.name = 'exter_good_qu'
+
+exter_poor_cond = all_data.ExterCond.copy()
+exter_poor_cond[exter_poor_cond<3] = 1
+exter_poor_cond[exter_poor_cond>=3] = 0
+exter_poor_cond.name = 'exter_poor_cond'
+
+exter_good_cond = all_data.ExterCond.copy()
+exter_good_cond[exter_good_cond<=3] = 0
+exter_good_cond[exter_good_cond>3] = 1
+exter_good_cond.name = 'exter_good_cond'
+
+bsmt_poor_cond = all_data.BsmtCond.copy()
+bsmt_poor_cond[bsmt_poor_cond<3] = 1
+bsmt_poor_cond[bsmt_poor_cond>=3] = 0
+bsmt_poor_cond.name = 'bsmt_poor_cond'
+
+bsmt_good_cond = all_data.BsmtCond.copy()
+bsmt_good_cond[bsmt_good_cond<=3] = 0
+bsmt_good_cond[bsmt_good_cond>3] = 1
+bsmt_good_cond.name = 'bsmt_good_cond'
+
+garage_poor_qu = all_data.GarageQual.copy()
+garage_poor_qu[garage_poor_qu<3] = 1
+garage_poor_qu[garage_poor_qu>=3] = 0
+garage_poor_qu.name = 'garage_poor_qu'
+
+garage_good_qu = all_data.GarageQual.copy()
+garage_good_qu[garage_good_qu<=3] = 0
+garage_good_qu[garage_good_qu>3] = 1
+garage_good_qu.name = 'garage_good_qu'
+
+garage_poor_cond = all_data.GarageCond.copy()
+garage_poor_cond[garage_poor_cond<3] = 1
+garage_poor_cond[garage_poor_cond>=3] = 0
+garage_poor_cond.name = 'garage_poor_cond'
+
+garage_good_cond = all_data.GarageCond.copy()
+garage_good_cond[garage_good_cond<=3] = 0
+garage_good_cond[garage_good_cond>3] = 1
+garage_good_cond.name = 'garage_good_cond'
+
+kitchen_poor_qu = all_data.KitchenQual.copy()
+kitchen_poor_qu[kitchen_poor_qu<3] = 1
+kitchen_poor_qu[kitchen_poor_qu>=3] = 0
+kitchen_poor_qu.name = 'kitchen_poor_qu'
+
+kitchen_good_qu = all_data.KitchenQual.copy()
+kitchen_good_qu[kitchen_good_qu<=3] = 0
+kitchen_good_qu[kitchen_good_qu>3] = 1
+kitchen_good_qu.name = 'kitchen_good_qu'
+
+qu_list = pd.concat((overall_poor_qu, overall_good_qu, overall_poor_cond, overall_good_cond, exter_poor_qu,
+                     exter_good_qu, exter_poor_cond, exter_good_cond, bsmt_poor_cond, bsmt_good_cond, garage_poor_qu,
+                     garage_good_qu, garage_poor_cond, garage_good_cond, kitchen_poor_qu, kitchen_good_qu), axis=1)
+
+
+
+bad_heating = all_data.HeatingQC.replace({'Ex': 0, 
+                                          'Gd': 0, 
+                                          'TA': 0, 
+                                          'Fa': 1,
+                                          'Po': 1})
+bad_heating.name = 'bad_heating'
+                                          
+MasVnrType_Any = all_data.MasVnrType.replace({'BrkCmn': 1,
+                                              'BrkFace': 1,
+                                              'CBlock': 1,
+                                              'Stone': 1,
+                                              'None': 0})
+MasVnrType_Any.name = 'MasVnrType_Any'
+
+SaleCondition_PriceDown = all_data.SaleCondition.replace({'Abnorml': 1,
+                                                          'Alloca': 1,
+                                                          'AdjLand': 1,
+                                                          'Family': 1,
+                                                          'Normal': 0,
+                                                          'Partial': 0})
+SaleCondition_PriceDown.name = 'SaleCondition_PriceDown'
+
+Neighborhood_Good = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Neighborhood_Good'])
+Neighborhood_Good[all_data.Neighborhood=='NridgHt'] = 1
+Neighborhood_Good[all_data.Neighborhood=='Crawfor'] = 1
+Neighborhood_Good[all_data.Neighborhood=='StoneBr'] = 1
+Neighborhood_Good[all_data.Neighborhood=='Somerst'] = 1
+Neighborhood_Good[all_data.Neighborhood=='NoRidge'] = 1
+
+```
+
+*** =sample_code
+```{python}
+#Training
+
+svm = SVC(C=100, gamma=0.0001, kernel='rbf')
+pc = pd.Series(np.zeros(train.shape[0]))
+
+pc[:] = 'pc1'
+pc[train.SalePrice >= 150000] = 'pc2'
+pc[train.SalePrice >= 220000] = 'pc3'
+columns_for_pc = ['Exterior1st', 'Exterior2nd', 'RoofMatl', 'Condition1', 'Condition2', 'BldgType']
+X_t = pd.get_dummies(train.loc[:, columns_for_pc], sparse=True)
+svm.fit(X_t, pc) 
+
+pc_pred = svm.predict(X_t)
+
+p = train.SalePrice/100000
+
+price_category = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['pc'])
+X_t = pd.get_dummies(all_data.loc[:, columns_for_pc], sparse=True)
+pc_pred = svm.predict(X_t)
+price_category[pc_pred=='pc2'] = 1
+price_category[pc_pred=='pc3'] = 2
+
+price_category = price_category.to_sparse()
+
+
+season = all_data.MoSold.replace( {1: 0, 
+                                   2: 0, 
+                                   3: 0, 
+                                   4: 1,
+                                   5: 1, 
+                                   6: 1,
+                                   7: 1,
+                                   8: 0,
+                                   9: 0,
+                                  10: 0,
+                                  11: 0,
+                                  12: 0})
+season.name = 'season'
+
+all_data = all_data.replace({'MoSold': {1: 'Yan', 
+                                        2: 'Feb', 
+                                        3: 'Mar', 
+                                        4: 'Apr',
+                                        5: 'May', 
+                                        6: 'Jun',
+                                        7: 'Jul',
+                                        8: 'Avg',
+                                        9: 'Sep',
+                                        10: 'Oct',
+                                        11: 'Nov',
+                                        12: 'Dec'}})
+
+
+reconstruct = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Reconstruct'])
+reconstruct[all_data.YrSold < all_data.YearRemodAdd] = 1
+reconstruct = reconstruct.to_sparse()
+
+recon_after_buy = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['ReconstructAfterBuy'])
+recon_after_buy[all_data.YearRemodAdd >= all_data.YrSold] = 1
+recon_after_buy = recon_after_buy.to_sparse()
+
+build_eq_buy = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Build.eq.Buy'])
+build_eq_buy[all_data.YearBuilt >= all_data.YrSold] = 1
+build_eq_buy = build_eq_buy.to_sparse()
+
+
+all_data.YrSold = 2010 - all_data.YrSold
+year_map = pd.concat(pd.Series('YearGroup' + str(i+1), index=range(1871+i*20,1891+i*20)) for i in range(0, 7))
+all_data.GarageYrBlt = all_data.GarageYrBlt.map(year_map)
+all_data.loc[all_data['GarageYrBlt'].isnull(), 'GarageYrBlt'] = 'NoGarage'
+
+
+all_data.YearBuilt = all_data.YearBuilt.map(year_map)
+all_data.YearRemodAdd = all_data.YearRemodAdd.map(year_map)
+
+
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:fc38cf7232
+## Scaling 
+
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as pl
+from sklearn.linear_model import Lasso
+import warnings
+warnings.filterwarnings("ignore")
+# import seaborn as sns
+from scipy.stats import skew
+from scipy.stats.stats import pearsonr
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import make_scorer, mean_squared_error
+
+from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
+# from sklearn.model_selection import cross_val_score
+
+
+from operator import itemgetter
+import itertools
+import xgboost as xgb
+from sklearn.svm import SVC
+from itertools import product, chain
+
+
+
+
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
+
+# only one is null and it has type Detchd
+all_data.loc[all_data['GarageArea'].isnull(), 'GarageArea'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageArea'].mean()
+all_data.loc[all_data['GarageCars'].isnull(), 'GarageCars'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageCars'].median()
+
+
+# where we have order we will use numeric
+all_data = all_data.replace({'Utilities': {'AllPub': 1, 'NoSeWa': 0, 'NoSewr': 0, 'ELO': 0},
+                             'Street': {'Pave': 1, 'Grvl': 0 },
+                             'FireplaceQu': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoFireplace': 0 
+                                            },
+                             'Fence': {'GdPrv': 2, 
+                                       'GdWo': 2, 
+                                       'MnPrv': 1, 
+                                       'MnWw': 1,
+                                       'NoFence': 0},
+                             'ExterQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'ExterCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'BsmtQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'BsmtExposure': {'Gd': 3, 
+                                            'Av': 2, 
+                                            'Mn': 1,
+                                            'No': 0,
+                                            'NoBsmt': 0},
+                             'BsmtCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'GarageQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'GarageCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'KitchenQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1},
+                             'Functional': {'Typ': 0,
+                                            'Min1': 1,
+                                            'Min2': 1,
+                                            'Mod': 2,
+                                            'Maj1': 3,
+                                            'Maj2': 4,
+                                            'Sev': 5,
+                                            'Sal': 6}                             
+                            })
+
+
+all_data = all_data.replace({'CentralAir': {'Y': 1, 
+                                            'N': 0}})
+all_data = all_data.replace({'PavedDrive': {'Y': 1, 
+                                            'P': 0,
+                                            'N': 0}})
+                                            
+
+# NEW FEATURES
+
+newer_dwelling = all_data.MSSubClass.replace({20: 1, 
+                                            30: 0, 
+                                            40: 0, 
+                                            45: 0,
+                                            50: 0, 
+                                            60: 1,
+                                            70: 0,
+                                            75: 0,
+                                            80: 0,
+                                            85: 0,
+                                            90: 0,
+                                           120: 1,
+                                           150: 0,
+                                           160: 0,
+                                           180: 0,
+                                           190: 0})
+newer_dwelling.name = 'newer_dwelling'
+
+
+all_data = all_data.replace({'MSSubClass': {20: 'SubClass_20', 
+                                            30: 'SubClass_30', 
+                                            40: 'SubClass_40', 
+                                            45: 'SubClass_45',
+                                            50: 'SubClass_50', 
+                                            60: 'SubClass_60',
+                                            70: 'SubClass_70',
+                                            75: 'SubClass_75',
+                                            80: 'SubClass_80',
+                                            85: 'SubClass_85',
+                                            90: 'SubClass_90',
+                                           120: 'SubClass_120',
+                                           150: 'SubClass_150',
+                                           160: 'SubClass_160',
+                                           180: 'SubClass_180',
+                                           190: 'SubClass_190'}})
+
+# The idea is good quality should rise price, poor quality - reduce price
+overall_poor_qu = all_data.OverallQual.copy()
+overall_poor_qu = 5 - overall_poor_qu
+overall_poor_qu[overall_poor_qu<0] = 0
+overall_poor_qu.name = 'overall_poor_qu'
+
+overall_good_qu = all_data.OverallQual.copy()
+overall_good_qu = overall_good_qu - 5
+overall_good_qu[overall_good_qu<0] = 0
+overall_good_qu.name = 'overall_good_qu'
+
+overall_poor_cond = all_data.OverallCond.copy()
+overall_poor_cond = 5 - overall_poor_cond
+overall_poor_cond[overall_poor_cond<0] = 0
+overall_poor_cond.name = 'overall_poor_cond'
+
+overall_good_cond = all_data.OverallCond.copy()
+overall_good_cond = overall_good_cond - 5
+overall_good_cond[overall_good_cond<0] = 0
+overall_good_cond.name = 'overall_good_cond'
+
+exter_poor_qu = all_data.ExterQual.copy()
+exter_poor_qu[exter_poor_qu<3] = 1
+exter_poor_qu[exter_poor_qu>=3] = 0
+exter_poor_qu.name = 'exter_poor_qu'
+
+exter_good_qu = all_data.ExterQual.copy()
+exter_good_qu[exter_good_qu<=3] = 0
+exter_good_qu[exter_good_qu>3] = 1
+exter_good_qu.name = 'exter_good_qu'
+
+exter_poor_cond = all_data.ExterCond.copy()
+exter_poor_cond[exter_poor_cond<3] = 1
+exter_poor_cond[exter_poor_cond>=3] = 0
+exter_poor_cond.name = 'exter_poor_cond'
+
+exter_good_cond = all_data.ExterCond.copy()
+exter_good_cond[exter_good_cond<=3] = 0
+exter_good_cond[exter_good_cond>3] = 1
+exter_good_cond.name = 'exter_good_cond'
+
+bsmt_poor_cond = all_data.BsmtCond.copy()
+bsmt_poor_cond[bsmt_poor_cond<3] = 1
+bsmt_poor_cond[bsmt_poor_cond>=3] = 0
+bsmt_poor_cond.name = 'bsmt_poor_cond'
+
+bsmt_good_cond = all_data.BsmtCond.copy()
+bsmt_good_cond[bsmt_good_cond<=3] = 0
+bsmt_good_cond[bsmt_good_cond>3] = 1
+bsmt_good_cond.name = 'bsmt_good_cond'
+
+garage_poor_qu = all_data.GarageQual.copy()
+garage_poor_qu[garage_poor_qu<3] = 1
+garage_poor_qu[garage_poor_qu>=3] = 0
+garage_poor_qu.name = 'garage_poor_qu'
+
+garage_good_qu = all_data.GarageQual.copy()
+garage_good_qu[garage_good_qu<=3] = 0
+garage_good_qu[garage_good_qu>3] = 1
+garage_good_qu.name = 'garage_good_qu'
+
+garage_poor_cond = all_data.GarageCond.copy()
+garage_poor_cond[garage_poor_cond<3] = 1
+garage_poor_cond[garage_poor_cond>=3] = 0
+garage_poor_cond.name = 'garage_poor_cond'
+
+garage_good_cond = all_data.GarageCond.copy()
+garage_good_cond[garage_good_cond<=3] = 0
+garage_good_cond[garage_good_cond>3] = 1
+garage_good_cond.name = 'garage_good_cond'
+
+kitchen_poor_qu = all_data.KitchenQual.copy()
+kitchen_poor_qu[kitchen_poor_qu<3] = 1
+kitchen_poor_qu[kitchen_poor_qu>=3] = 0
+kitchen_poor_qu.name = 'kitchen_poor_qu'
+
+kitchen_good_qu = all_data.KitchenQual.copy()
+kitchen_good_qu[kitchen_good_qu<=3] = 0
+kitchen_good_qu[kitchen_good_qu>3] = 1
+kitchen_good_qu.name = 'kitchen_good_qu'
+
+qu_list = pd.concat((overall_poor_qu, overall_good_qu, overall_poor_cond, overall_good_cond, exter_poor_qu,
+                     exter_good_qu, exter_poor_cond, exter_good_cond, bsmt_poor_cond, bsmt_good_cond, garage_poor_qu,
+                     garage_good_qu, garage_poor_cond, garage_good_cond, kitchen_poor_qu, kitchen_good_qu), axis=1)
+
+
+
+bad_heating = all_data.HeatingQC.replace({'Ex': 0, 
+                                          'Gd': 0, 
+                                          'TA': 0, 
+                                          'Fa': 1,
+                                          'Po': 1})
+bad_heating.name = 'bad_heating'
+                                          
+MasVnrType_Any = all_data.MasVnrType.replace({'BrkCmn': 1,
+                                              'BrkFace': 1,
+                                              'CBlock': 1,
+                                              'Stone': 1,
+                                              'None': 0})
+MasVnrType_Any.name = 'MasVnrType_Any'
+
+SaleCondition_PriceDown = all_data.SaleCondition.replace({'Abnorml': 1,
+                                                          'Alloca': 1,
+                                                          'AdjLand': 1,
+                                                          'Family': 1,
+                                                          'Normal': 0,
+                                                          'Partial': 0})
+SaleCondition_PriceDown.name = 'SaleCondition_PriceDown'
+
+Neighborhood_Good = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Neighborhood_Good'])
+Neighborhood_Good[all_data.Neighborhood=='NridgHt'] = 1
+Neighborhood_Good[all_data.Neighborhood=='Crawfor'] = 1
+Neighborhood_Good[all_data.Neighborhood=='StoneBr'] = 1
+Neighborhood_Good[all_data.Neighborhood=='Somerst'] = 1
+Neighborhood_Good[all_data.Neighborhood=='NoRidge'] = 1
+
+
+svm = SVC(C=100, gamma=0.0001, kernel='rbf')
+pc = pd.Series(np.zeros(train.shape[0]))
+
+pc[:] = 'pc1'
+pc[train.SalePrice >= 150000] = 'pc2'
+pc[train.SalePrice >= 220000] = 'pc3'
+columns_for_pc = ['Exterior1st', 'Exterior2nd', 'RoofMatl', 'Condition1', 'Condition2', 'BldgType']
+X_t = pd.get_dummies(train.loc[:, columns_for_pc], sparse=True)
+svm.fit(X_t, pc) 
+
+#Training
+
+pc_pred = svm.predict(X_t)
+
+p = train.SalePrice/100000
+
+price_category = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['pc'])
+X_t = pd.get_dummies(all_data.loc[:, columns_for_pc], sparse=True)
+pc_pred = svm.predict(X_t)
+price_category[pc_pred=='pc2'] = 1
+price_category[pc_pred=='pc3'] = 2
+
+price_category = price_category.to_sparse()
+
+
+season = all_data.MoSold.replace( {1: 0, 
+                                   2: 0, 
+                                   3: 0, 
+                                   4: 1,
+                                   5: 1, 
+                                   6: 1,
+                                   7: 1,
+                                   8: 0,
+                                   9: 0,
+                                  10: 0,
+                                  11: 0,
+                                  12: 0})
+season.name = 'season'
+
+all_data = all_data.replace({'MoSold': {1: 'Yan', 
+                                        2: 'Feb', 
+                                        3: 'Mar', 
+                                        4: 'Apr',
+                                        5: 'May', 
+                                        6: 'Jun',
+                                        7: 'Jul',
+                                        8: 'Avg',
+                                        9: 'Sep',
+                                        10: 'Oct',
+                                        11: 'Nov',
+                                        12: 'Dec'}})
+
+
+reconstruct = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Reconstruct'])
+reconstruct[all_data.YrSold < all_data.YearRemodAdd] = 1
+reconstruct = reconstruct.to_sparse()
+
+recon_after_buy = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['ReconstructAfterBuy'])
+recon_after_buy[all_data.YearRemodAdd >= all_data.YrSold] = 1
+recon_after_buy = recon_after_buy.to_sparse()
+
+build_eq_buy = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Build.eq.Buy'])
+build_eq_buy[all_data.YearBuilt >= all_data.YrSold] = 1
+build_eq_buy = build_eq_buy.to_sparse()
+
+
+all_data.YrSold = 2010 - all_data.YrSold
+year_map = pd.concat(pd.Series('YearGroup' + str(i+1), index=range(1871+i*20,1891+i*20)) for i in range(0, 7))
+all_data.GarageYrBlt = all_data.GarageYrBlt.map(year_map)
+all_data.loc[all_data['GarageYrBlt'].isnull(), 'GarageYrBlt'] = 'NoGarage'
+
+
+all_data.YearBuilt = all_data.YearBuilt.map(year_map)
+all_data.YearRemodAdd = all_data.YearRemodAdd.map(year_map)
+
+```
+
+*** =sample_code
+```{python}
+# SCALING
+
+
+numeric_feats = all_data.dtypes[all_data.dtypes != "object"].index
+t = all_data[numeric_feats].quantile(.75)
+use_75_scater = t[t != 0].index
+all_data[use_75_scater] = all_data[use_75_scater]/all_data[use_75_scater].quantile(.75)
+
+
+t = ['LotFrontage', 'LotArea', 'MasVnrArea', 'BsmtFinSF1', 'BsmtFinSF2', 'BsmtUnfSF', 'TotalBsmtSF', 
+     '1stFlrSF', '2ndFlrSF', 'LowQualFinSF', 'GrLivArea', 'GarageArea', 'WoodDeckSF', 'OpenPorchSF', 
+     'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'MiscVal']
+
+all_data.loc[:, t] = np.log1p(all_data.loc[:, t])
+train["SalePrice"] = np.log1p(train["SalePrice"])
+
+X = pd.get_dummies(all_data)
+X = X.fillna(X.mean())
+
+X = X.drop('RoofMatl_ClyTile', axis=1) # only one is not zero
+X = X.drop('Condition2_PosN', axis=1) # only two is not zero
+X = X.drop('MSZoning_C (all)', axis=1)
+X = X.drop('MSSubClass_SubClass_160', axis=1)
+
+X = pd.concat((X, newer_dwelling, season, reconstruct, recon_after_buy,
+               qu_list, bad_heating, MasVnrType_Any, price_category, build_eq_buy), axis=1)
+
+
+
+def poly(X):
+    areas = ['LotArea', 'TotalBsmtSF', 'GrLivArea', 'GarageArea', 'BsmtUnfSF']
+    t = chain(qu_list.axes[1].get_values(), 
+              ['OverallQual', 'OverallCond', 'ExterQual', 'ExterCond', 'BsmtCond', 'GarageQual', 'GarageCond',
+               'KitchenQual', 'HeatingQC', 'bad_heating', 'MasVnrType_Any', 'SaleCondition_PriceDown', 'Reconstruct',
+               'ReconstructAfterBuy', 'Build.eq.Buy'])
+    for a, t in product(areas, t):
+        x = X.loc[:, [a, t]].prod(1)
+        x.name = a + '_' + t
+        yield x
+
+XP = pd.concat(poly(X), axis=1)
+X = pd.concat((X, XP), axis=1)
+
+
+X_train = X[:train.shape[0]]
+X_test = X[train.shape[0]:]
+y = train.SalePrice
+
+#outliers_id = np.array([31, 463, 524, 633, 969, 971, 1299, 1325])
+outliers_id = np.array([523,1298])
+
+
+X_train = X_train.drop(outliers_id)
+y = y.drop(outliers_id) 
+
+
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:4606e24007
+## Final Prediction 
+
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as pl
+from sklearn.linear_model import Lasso
+import warnings
+warnings.filterwarnings("ignore")
+# import seaborn as sns
+from scipy.stats import skew
+from scipy.stats.stats import pearsonr
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import make_scorer, mean_squared_error
+
+from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
+# from sklearn.model_selection import cross_val_score
+
+from operator import itemgetter
+import itertools
+import xgboost as xgb
+from sklearn.svm import SVC
+from itertools import product, chain
+
+
+
+
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
+
+# only one is null and it has type Detchd
+all_data.loc[all_data['GarageArea'].isnull(), 'GarageArea'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageArea'].mean()
+all_data.loc[all_data['GarageCars'].isnull(), 'GarageCars'] = all_data.loc[all_data['GarageType']=='Detchd', 'GarageCars'].median()
+
+
+# where we have order we will use numeric
+all_data = all_data.replace({'Utilities': {'AllPub': 1, 'NoSeWa': 0, 'NoSewr': 0, 'ELO': 0},
+                             'Street': {'Pave': 1, 'Grvl': 0 },
+                             'FireplaceQu': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoFireplace': 0 
+                                            },
+                             'Fence': {'GdPrv': 2, 
+                                       'GdWo': 2, 
+                                       'MnPrv': 1, 
+                                       'MnWw': 1,
+                                       'NoFence': 0},
+                             'ExterQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'ExterCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1
+                                            },
+                             'BsmtQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'BsmtExposure': {'Gd': 3, 
+                                            'Av': 2, 
+                                            'Mn': 1,
+                                            'No': 0,
+                                            'NoBsmt': 0},
+                             'BsmtCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoBsmt': 0},
+                             'GarageQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'GarageCond': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1,
+                                            'NoGarage': 0},
+                             'KitchenQual': {'Ex': 5, 
+                                            'Gd': 4, 
+                                            'TA': 3, 
+                                            'Fa': 2,
+                                            'Po': 1},
+                             'Functional': {'Typ': 0,
+                                            'Min1': 1,
+                                            'Min2': 1,
+                                            'Mod': 2,
+                                            'Maj1': 3,
+                                            'Maj2': 4,
+                                            'Sev': 5,
+                                            'Sal': 6}                             
+                            })
+
+
+all_data = all_data.replace({'CentralAir': {'Y': 1, 
+                                            'N': 0}})
+all_data = all_data.replace({'PavedDrive': {'Y': 1, 
+                                            'P': 0,
+                                            'N': 0}})
+                                            
+
+# NEW FEATURES
+
+newer_dwelling = all_data.MSSubClass.replace({20: 1, 
+                                            30: 0, 
+                                            40: 0, 
+                                            45: 0,
+                                            50: 0, 
+                                            60: 1,
+                                            70: 0,
+                                            75: 0,
+                                            80: 0,
+                                            85: 0,
+                                            90: 0,
+                                           120: 1,
+                                           150: 0,
+                                           160: 0,
+                                           180: 0,
+                                           190: 0})
+newer_dwelling.name = 'newer_dwelling'
+
+
+all_data = all_data.replace({'MSSubClass': {20: 'SubClass_20', 
+                                            30: 'SubClass_30', 
+                                            40: 'SubClass_40', 
+                                            45: 'SubClass_45',
+                                            50: 'SubClass_50', 
+                                            60: 'SubClass_60',
+                                            70: 'SubClass_70',
+                                            75: 'SubClass_75',
+                                            80: 'SubClass_80',
+                                            85: 'SubClass_85',
+                                            90: 'SubClass_90',
+                                           120: 'SubClass_120',
+                                           150: 'SubClass_150',
+                                           160: 'SubClass_160',
+                                           180: 'SubClass_180',
+                                           190: 'SubClass_190'}})
+
+# The idea is good quality should rise price, poor quality - reduce price
+overall_poor_qu = all_data.OverallQual.copy()
+overall_poor_qu = 5 - overall_poor_qu
+overall_poor_qu[overall_poor_qu<0] = 0
+overall_poor_qu.name = 'overall_poor_qu'
+
+overall_good_qu = all_data.OverallQual.copy()
+overall_good_qu = overall_good_qu - 5
+overall_good_qu[overall_good_qu<0] = 0
+overall_good_qu.name = 'overall_good_qu'
+
+overall_poor_cond = all_data.OverallCond.copy()
+overall_poor_cond = 5 - overall_poor_cond
+overall_poor_cond[overall_poor_cond<0] = 0
+overall_poor_cond.name = 'overall_poor_cond'
+
+overall_good_cond = all_data.OverallCond.copy()
+overall_good_cond = overall_good_cond - 5
+overall_good_cond[overall_good_cond<0] = 0
+overall_good_cond.name = 'overall_good_cond'
+
+exter_poor_qu = all_data.ExterQual.copy()
+exter_poor_qu[exter_poor_qu<3] = 1
+exter_poor_qu[exter_poor_qu>=3] = 0
+exter_poor_qu.name = 'exter_poor_qu'
+
+exter_good_qu = all_data.ExterQual.copy()
+exter_good_qu[exter_good_qu<=3] = 0
+exter_good_qu[exter_good_qu>3] = 1
+exter_good_qu.name = 'exter_good_qu'
+
+exter_poor_cond = all_data.ExterCond.copy()
+exter_poor_cond[exter_poor_cond<3] = 1
+exter_poor_cond[exter_poor_cond>=3] = 0
+exter_poor_cond.name = 'exter_poor_cond'
+
+exter_good_cond = all_data.ExterCond.copy()
+exter_good_cond[exter_good_cond<=3] = 0
+exter_good_cond[exter_good_cond>3] = 1
+exter_good_cond.name = 'exter_good_cond'
+
+bsmt_poor_cond = all_data.BsmtCond.copy()
+bsmt_poor_cond[bsmt_poor_cond<3] = 1
+bsmt_poor_cond[bsmt_poor_cond>=3] = 0
+bsmt_poor_cond.name = 'bsmt_poor_cond'
+
+bsmt_good_cond = all_data.BsmtCond.copy()
+bsmt_good_cond[bsmt_good_cond<=3] = 0
+bsmt_good_cond[bsmt_good_cond>3] = 1
+bsmt_good_cond.name = 'bsmt_good_cond'
+
+garage_poor_qu = all_data.GarageQual.copy()
+garage_poor_qu[garage_poor_qu<3] = 1
+garage_poor_qu[garage_poor_qu>=3] = 0
+garage_poor_qu.name = 'garage_poor_qu'
+
+garage_good_qu = all_data.GarageQual.copy()
+garage_good_qu[garage_good_qu<=3] = 0
+garage_good_qu[garage_good_qu>3] = 1
+garage_good_qu.name = 'garage_good_qu'
+
+garage_poor_cond = all_data.GarageCond.copy()
+garage_poor_cond[garage_poor_cond<3] = 1
+garage_poor_cond[garage_poor_cond>=3] = 0
+garage_poor_cond.name = 'garage_poor_cond'
+
+garage_good_cond = all_data.GarageCond.copy()
+garage_good_cond[garage_good_cond<=3] = 0
+garage_good_cond[garage_good_cond>3] = 1
+garage_good_cond.name = 'garage_good_cond'
+
+kitchen_poor_qu = all_data.KitchenQual.copy()
+kitchen_poor_qu[kitchen_poor_qu<3] = 1
+kitchen_poor_qu[kitchen_poor_qu>=3] = 0
+kitchen_poor_qu.name = 'kitchen_poor_qu'
+
+kitchen_good_qu = all_data.KitchenQual.copy()
+kitchen_good_qu[kitchen_good_qu<=3] = 0
+kitchen_good_qu[kitchen_good_qu>3] = 1
+kitchen_good_qu.name = 'kitchen_good_qu'
+
+qu_list = pd.concat((overall_poor_qu, overall_good_qu, overall_poor_cond, overall_good_cond, exter_poor_qu,
+                     exter_good_qu, exter_poor_cond, exter_good_cond, bsmt_poor_cond, bsmt_good_cond, garage_poor_qu,
+                     garage_good_qu, garage_poor_cond, garage_good_cond, kitchen_poor_qu, kitchen_good_qu), axis=1)
+
+
+
+bad_heating = all_data.HeatingQC.replace({'Ex': 0, 
+                                          'Gd': 0, 
+                                          'TA': 0, 
+                                          'Fa': 1,
+                                          'Po': 1})
+bad_heating.name = 'bad_heating'
+                                          
+MasVnrType_Any = all_data.MasVnrType.replace({'BrkCmn': 1,
+                                              'BrkFace': 1,
+                                              'CBlock': 1,
+                                              'Stone': 1,
+                                              'None': 0})
+MasVnrType_Any.name = 'MasVnrType_Any'
+
+SaleCondition_PriceDown = all_data.SaleCondition.replace({'Abnorml': 1,
+                                                          'Alloca': 1,
+                                                          'AdjLand': 1,
+                                                          'Family': 1,
+                                                          'Normal': 0,
+                                                          'Partial': 0})
+SaleCondition_PriceDown.name = 'SaleCondition_PriceDown'
+
+Neighborhood_Good = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Neighborhood_Good'])
+Neighborhood_Good[all_data.Neighborhood=='NridgHt'] = 1
+Neighborhood_Good[all_data.Neighborhood=='Crawfor'] = 1
+Neighborhood_Good[all_data.Neighborhood=='StoneBr'] = 1
+Neighborhood_Good[all_data.Neighborhood=='Somerst'] = 1
+Neighborhood_Good[all_data.Neighborhood=='NoRidge'] = 1
+
+
+svm = SVC(C=100, gamma=0.0001, kernel='rbf')
+pc = pd.Series(np.zeros(train.shape[0]))
+
+pc[:] = 'pc1'
+pc[train.SalePrice >= 150000] = 'pc2'
+pc[train.SalePrice >= 220000] = 'pc3'
+columns_for_pc = ['Exterior1st', 'Exterior2nd', 'RoofMatl', 'Condition1', 'Condition2', 'BldgType']
+X_t = pd.get_dummies(train.loc[:, columns_for_pc], sparse=True)
+svm.fit(X_t, pc) 
+
+#Training
+
+pc_pred = svm.predict(X_t)
+
+p = train.SalePrice/100000
+
+price_category = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['pc'])
+X_t = pd.get_dummies(all_data.loc[:, columns_for_pc], sparse=True)
+pc_pred = svm.predict(X_t)
+price_category[pc_pred=='pc2'] = 1
+price_category[pc_pred=='pc3'] = 2
+
+price_category = price_category.to_sparse()
+
+
+season = all_data.MoSold.replace( {1: 0, 
+                                   2: 0, 
+                                   3: 0, 
+                                   4: 1,
+                                   5: 1, 
+                                   6: 1,
+                                   7: 1,
+                                   8: 0,
+                                   9: 0,
+                                  10: 0,
+                                  11: 0,
+                                  12: 0})
+season.name = 'season'
+
+all_data = all_data.replace({'MoSold': {1: 'Yan', 
+                                        2: 'Feb', 
+                                        3: 'Mar', 
+                                        4: 'Apr',
+                                        5: 'May', 
+                                        6: 'Jun',
+                                        7: 'Jul',
+                                        8: 'Avg',
+                                        9: 'Sep',
+                                        10: 'Oct',
+                                        11: 'Nov',
+                                        12: 'Dec'}})
+
+
+reconstruct = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Reconstruct'])
+reconstruct[all_data.YrSold < all_data.YearRemodAdd] = 1
+reconstruct = reconstruct.to_sparse()
+
+recon_after_buy = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['ReconstructAfterBuy'])
+recon_after_buy[all_data.YearRemodAdd >= all_data.YrSold] = 1
+recon_after_buy = recon_after_buy.to_sparse()
+
+build_eq_buy = pd.DataFrame(np.zeros((all_data.shape[0],1)), columns=['Build.eq.Buy'])
+build_eq_buy[all_data.YearBuilt >= all_data.YrSold] = 1
+build_eq_buy = build_eq_buy.to_sparse()
+
+
+all_data.YrSold = 2010 - all_data.YrSold
+year_map = pd.concat(pd.Series('YearGroup' + str(i+1), index=range(1871+i*20,1891+i*20)) for i in range(0, 7))
+all_data.GarageYrBlt = all_data.GarageYrBlt.map(year_map)
+all_data.loc[all_data['GarageYrBlt'].isnull(), 'GarageYrBlt'] = 'NoGarage'
+
+
+all_data.YearBuilt = all_data.YearBuilt.map(year_map)
+all_data.YearRemodAdd = all_data.YearRemodAdd.map(year_map)
+
+# SCALING
+
+
+numeric_feats = all_data.dtypes[all_data.dtypes != "object"].index
+t = all_data[numeric_feats].quantile(.75)
+use_75_scater = t[t != 0].index
+all_data[use_75_scater] = all_data[use_75_scater]/all_data[use_75_scater].quantile(.75)
+
+
+t = ['LotFrontage', 'LotArea', 'MasVnrArea', 'BsmtFinSF1', 'BsmtFinSF2', 'BsmtUnfSF', 'TotalBsmtSF', 
+     '1stFlrSF', '2ndFlrSF', 'LowQualFinSF', 'GrLivArea', 'GarageArea', 'WoodDeckSF', 'OpenPorchSF', 
+     'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'MiscVal']
+
+all_data.loc[:, t] = np.log1p(all_data.loc[:, t])
+train["SalePrice"] = np.log1p(train["SalePrice"])
+
+X = pd.get_dummies(all_data)
+X = X.fillna(X.mean())
+
+X = X.drop('RoofMatl_ClyTile', axis=1) # only one is not zero
+X = X.drop('Condition2_PosN', axis=1) # only two is not zero
+X = X.drop('MSZoning_C (all)', axis=1)
+X = X.drop('MSSubClass_SubClass_160', axis=1)
+
+X = pd.concat((X, newer_dwelling, season, reconstruct, recon_after_buy,
+               qu_list, bad_heating, MasVnrType_Any, price_category, build_eq_buy), axis=1)
+
+
+
+def poly(X):
+    areas = ['LotArea', 'TotalBsmtSF', 'GrLivArea', 'GarageArea', 'BsmtUnfSF']
+    t = chain(qu_list.axes[1].get_values(), 
+              ['OverallQual', 'OverallCond', 'ExterQual', 'ExterCond', 'BsmtCond', 'GarageQual', 'GarageCond',
+               'KitchenQual', 'HeatingQC', 'bad_heating', 'MasVnrType_Any', 'SaleCondition_PriceDown', 'Reconstruct',
+               'ReconstructAfterBuy', 'Build.eq.Buy'])
+    for a, t in product(areas, t):
+        x = X.loc[:, [a, t]].prod(1)
+        x.name = a + '_' + t
+        yield x
+
+XP = pd.concat(poly(X), axis=1)
+X = pd.concat((X, XP), axis=1)
+
+
+X_train = X[:train.shape[0]]
+X_test = X[train.shape[0]:]
+y = train.SalePrice
+
+#outliers_id = np.array([31, 463, 524, 633, 969, 971, 1299, 1325])
+outliers_id = np.array([523,1298])
+
+
+X_train = X_train.drop(outliers_id)
+y = y.drop(outliers_id) 
+
+```
+
+*** =sample_code
+```{python}
+# FINAL PREDICTION
+
+def rmse_cv(model):
+    rmse= np.sqrt(-cross_val_score(model, X_train, y, scoring="neg_mean_squared_error", cv = 5))
+    return(rmse)
+
+
+#LASSO MODEL
+#clf1 = LassoCV(alphas = [1, 0.1, 0.001, 0.0005, 5e-4])
+#clf1.fit(X_train, y)
+#lasso_preds = np.expm1(clf1.predict(X_test))
+
+#ELASTIC NET
+#clf2 = ElasticNet(alpha=0.0005, l1_ratio=0.9)
+#clf2.fit(X_train, y)
+#elas_preds = np.expm1(clf2.predict(X_test))
+
+#XGBOOST
+clf3=xgb.XGBRegressor(colsample_bytree=0.4,
+                 gamma=0.045,                 
+                 learning_rate=0.07,
+                 max_depth=20,
+                 min_child_weight=1.5,
+                 n_estimators=300,                                                                    
+                 reg_alpha=0.65,
+                 reg_lambda=0.45,
+                 subsample=0.95)
+
+clf3.fit(X_train, y)
+xgb_preds = np.expm1(clf3.predict(X_test))
+
+#final_result = 0.50*lasso_preds + 0.24*xgb_preds+0.26*elas_preds
+final_result = xgb_preds
+solution = pd.DataFrame({"id":test.Id, "SalePrice":final_result}, columns=['id', 'SalePrice'])
+#print(solution)
+# [print(i[1]) for i in solution.values]
+
+# solution.to_csv("Persistence_submission.csv", index = False)
+
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
 ```
