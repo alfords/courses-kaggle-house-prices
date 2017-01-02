@@ -781,17 +781,6 @@ Neighborhood_Good[all_data.Neighborhood=='StoneBr'] = 1
 Neighborhood_Good[all_data.Neighborhood=='Somerst'] = 1
 Neighborhood_Good[all_data.Neighborhood=='NoRidge'] = 1
 
-
-svm = SVC(C=100, gamma=0.0001, kernel='rbf')
-pc = pd.Series(np.zeros(train.shape[0]))
-
-pc[:] = 'pc1'
-pc[train.SalePrice >= 150000] = 'pc2'
-pc[train.SalePrice >= 220000] = 'pc3'
-columns_for_pc = ['Exterior1st', 'Exterior2nd', 'RoofMatl', 'Condition1', 'Condition2', 'BldgType']
-X_t = pd.get_dummies(train.loc[:, columns_for_pc], sparse=True)
-svm.fit(X_t, pc) 
-
 ```
 
 *** =solution
@@ -1086,6 +1075,11 @@ Neighborhood_Good[all_data.Neighborhood=='StoneBr'] = 1
 Neighborhood_Good[all_data.Neighborhood=='Somerst'] = 1
 Neighborhood_Good[all_data.Neighborhood=='NoRidge'] = 1
 
+```
+
+*** =sample_code
+```{python}
+#Training
 
 svm = SVC(C=100, gamma=0.0001, kernel='rbf')
 pc = pd.Series(np.zeros(train.shape[0]))
@@ -1096,12 +1090,6 @@ pc[train.SalePrice >= 220000] = 'pc3'
 columns_for_pc = ['Exterior1st', 'Exterior2nd', 'RoofMatl', 'Condition1', 'Condition2', 'BldgType']
 X_t = pd.get_dummies(train.loc[:, columns_for_pc], sparse=True)
 svm.fit(X_t, pc) 
-
-```
-
-*** =sample_code
-```{python}
-#Training
 
 pc_pred = svm.predict(X_t)
 
