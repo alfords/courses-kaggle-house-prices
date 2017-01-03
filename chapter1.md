@@ -152,9 +152,6 @@ import xgboost as xgb
 from sklearn.svm import SVC
 from itertools import product, chain
 
-
-
-
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
 
@@ -228,6 +225,82 @@ all_data.loc[all_data.BsmtQual=='NoBsmt', 'TotalBsmtSF'] = 0
 
 ```
 
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:8cdcf43c3e
+## Visualization 
+
+
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as pl
+from sklearn.linear_model import Lasso
+import warnings
+warnings.filterwarnings("ignore")
+# import seaborn as sns
+from scipy.stats import skew
+from scipy.stats.stats import pearsonr
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import make_scorer, mean_squared_error
+
+from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
+# from sklearn.model_selection import cross_val_score
+
+
+from operator import itemgetter
+import itertools
+import xgboost as xgb
+from sklearn.svm import SVC
+from itertools import product, chain
+
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
+
+```
+
+*** =sample_code
+```{python}
+# Passengers that survived vs passengers that passed away
+print(train["SalePrice"].value_counts())
+
+# As proportions
+print(train["SalePrice"].value_counts(normalize = True))
+
+# Males that survived vs males that passed away
+print(train["SalePrice"][train["Sex"] == 'male'].value_counts())
+
+# Females that survived vs Females that passed away
+print(train["SalePrice"][train["Sex"] == 'female'].value_counts())
+
+# Normalized male survival
+print(train["SalePrice"][train["Sex"] == 'male'].value_counts(normalize = True))
+
+# Normalized female survival
+print(train["SalePrice"][train["Sex"] == 'female'].value_counts(normalize = True))
+
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
+```
 --- type:NormalExercise lang:python xp:100 skills:2 key:12bc8645ae
 ## Ordering Categorical data
 
