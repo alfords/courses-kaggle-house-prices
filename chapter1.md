@@ -229,7 +229,7 @@ all_data.loc[all_data.BsmtQual=='NoBsmt', 'TotalBsmtSF'] = 0
 --- type:NormalExercise lang:python xp:100 skills:2 key:8cdcf43c3e
 ## Visualization 
 
-
+Visualize some variable effects on the price of houses
 
 
 *** =instructions
@@ -239,26 +239,6 @@ all_data.loc[all_data.BsmtQual=='NoBsmt', 'TotalBsmtSF'] = 0
 *** =pre_exercise_code
 ```{python}
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as pl
-from sklearn.linear_model import Lasso
-import warnings
-warnings.filterwarnings("ignore")
-# import seaborn as sns
-from scipy.stats import skew
-from scipy.stats.stats import pearsonr
-from sklearn.cross_validation import cross_val_score
-from sklearn.metrics import make_scorer, mean_squared_error
-
-from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
-# from sklearn.model_selection import cross_val_score
-
-
-from operator import itemgetter
-import itertools
-import xgboost as xgb
-from sklearn.svm import SVC
-from itertools import product, chain
 
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
