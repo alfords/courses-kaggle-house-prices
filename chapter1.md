@@ -66,7 +66,14 @@ test_function("print",2,
 success_msg("Awesome! See how the console shows the result of the Python code you submitted? Now that you're familiar with the interface, let's get down to business!")
 ```
 --- type:NormalExercise lang:python xp:100 skills:2 key:969061c67f
-## Read data
+## Get the data with Pandas
+
+When the Titanic sank, 1502 of the 2224 passengers and crew were killed. One of the main reasons for this high level of casualties was the lack of lifeboats on this self-proclaimed "unsinkable" ship.
+
+Those that have seen the movie know that some individuals were more likely to survive the sinking (lucky Rose) than others (poor Jack). In this course, you will learn how to apply machine learning techniques to predict a passenger's chance of surviving using Python.
+
+Let's start with loading in the training and testing set into your Python environment. You will use the training set to build your model, and the test set to validate it. The data is stored on the web as csv files; their URLs are already available as character strings in the sample code. You can load this data with the read_csv() method from the Pandas library.
+
 
 
 *** =instructions
@@ -75,43 +82,30 @@ success_msg("Awesome! See how the console shows the result of the Python code yo
 
 *** =pre_exercise_code
 ```{python}
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as pl
-from sklearn.linear_model import Lasso
-import warnings
-warnings.filterwarnings("ignore")
-# import seaborn as sns
-from scipy.stats import skew
-from scipy.stats.stats import pearsonr
-from sklearn.cross_validation import cross_val_score
-from sklearn.metrics import make_scorer, mean_squared_error
-
-from sklearn.linear_model import Ridge, RidgeCV, ElasticNet, LassoCV, LassoLarsCV
-# from sklearn.model_selection import cross_val_score
-
-
-from operator import itemgetter
-import itertools
-import xgboost as xgb
-from sklearn.svm import SVC
-from itertools import product, chain
 
 ```
 
 *** =sample_code
 ```{python}
+# Import the Pandas library
+import pandas as pd
 
-
-
+# Load the train and test datasets to create two DataFrames
 train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
 train = pd.read_csv(train_url)
 
 test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
 test = pd.read_csv(test_url)
 
+#Print the `head` of the train and test dataframes
+print(train.head())
+print(test.head())
+
+#Combine both the train and test datasets 
 all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
 
+#Print the dimensions of `all_data`
+all_data.shape
 
 ```
 
