@@ -258,11 +258,13 @@ print(train["SalePrice"].value_counts())
 # As proportions
 print(train["SalePrice"].value_counts(normalize = True))
 
-# Males that survived vs males that passed away
-print(train["SalePrice"][train["PoolQC"] == 'male'].value_counts())
+# Different Neighborhood Sale Prices
+print(train["SalePrice"][train["Neighborhood"].value_counts())
 
-# Females that survived vs Females that passed away
-print(train["SalePrice"][train["Sex"] == 'female'].value_counts())
+# Different Lot Configuration Sale prices
+print(train["SalePrice"][train["LotConfig"].value_counts())
+
+
 
 # Normalized male survival
 print(train["SalePrice"][train["Sex"] == 'male'].value_counts(normalize = True))
