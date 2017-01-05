@@ -309,6 +309,9 @@ all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSS
 
 *** =sample_code
 ```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
 import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set(style="whitegrid")
@@ -322,6 +325,7 @@ corr_df = corr_df.sort_index().T
 f, ax = plt.subplots(figsize=(11, 6))
 
 # Draw a violinplot with a narrower bandwidth than the default
+plt.boxplot(data)
 sns.violinplot(data=corr_df)
 
 # Finalize the figure
