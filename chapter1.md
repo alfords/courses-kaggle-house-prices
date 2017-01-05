@@ -283,6 +283,71 @@ print(train["SalePrice"][train["Sex"] == 'female'].value_counts(normalize = True
 ```{python}
 
 ```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:ce858dedbc
+## Plot
+
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{python}
+import pandas as pd
+
+train_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/train.csv"
+train = pd.read_csv(train_url)
+
+test_url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_2470/datasets/test.csv"
+test = pd.read_csv(test_url)
+
+all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSSubClass':'SaleCondition']), ignore_index=True)
+
+```
+
+*** =sample_code
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.set(style="whitegrid")
+
+# Load the example dataset of brain network correlations
+df = sns.load_dataset("brain_networks", header=[0, 1, 2], index_col=0)
+
+# Pull out a specific subset of networks
+used_networks = [1, 3, 4, 5, 6, 7, 8, 11, 12, 13, 16, 17]
+used_columns = (df.columns.get_level_values("network")
+                          .astype(int)
+                          .isin(used_networks))
+df = df.loc[:, used_columns]
+
+# Compute the correlation matrix and average over networks
+corr_df = df.corr().groupby(level="network").mean()
+corr_df.index = corr_df.index.astype(int)
+corr_df = corr_df.sort_index().T
+
+# Set up the matplotlib figure
+f, ax = plt.subplots(figsize=(11, 6))
+
+# Draw a violinplot with a narrower bandwidth than the default
+sns.violinplot(data=corr_df, palette="Set3", bw=.2, cut=1, linewidth=1)
+
+# Finalize the figure
+ax.set(ylim=(-.7, 1.05))
+sns.despine(left=True, bottom=True)
+```
+
+*** =solution
+```{python}
+
+```
+
+*** =sct
+```{python}
+
+```
 --- type:NormalExercise lang:python xp:100 skills:2 key:12bc8645ae
 ## Ordering Categorical data
 
