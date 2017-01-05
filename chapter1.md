@@ -310,27 +310,15 @@ all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSS
 *** =sample_code
 ```{python}
 import matplotlib.pyplot as plt
-import numpy as np
 
-import seaborn as sns
-import matplotlib.pyplot as plt
-sns.set(style="whitegrid")
+# Plot in blue the % of degrees awarded to women in the Physical Sciences
+SalePrice = train.SalePrice
+LotFrontage = train.LotFrontage
+Neighborhood = train.Neighborhood
+plt.plot(SalePrice,Neighborhood)
 
-# Compute the correlation matrix and average over networks
-corr_df = train.corr().groupby(["TotalBsmtSF"]).mean()
-corr_df.index = corr_df.index.astype(int)
-corr_df = corr_df.sort_index().T
-
-# Set up the matplotlib figure
-f, ax = plt.subplots(figsize=(11, 6))
-
-# Draw a violinplot with a narrower bandwidth than the default
-plt.boxplot(data)
-sns.violinplot(data=corr_df)
-
-# Finalize the figure
-ax.set(ylim=(-.7, 1.05))
-sns.despine(left=True, bottom=True)
+# Display the plot
+plt.show()
 ```
 
 *** =solution
