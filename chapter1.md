@@ -303,18 +303,39 @@ all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSS
 *** =sample_code
 ```{python}
 import matplotlib.pyplot as plt
+# Create a figure with 2x2 subplot layout and make the top left subplot active
+plt.subplot(2, 2, 1) 
 
-collectn_1 = train.groupby(["LotArea"])["SalePrice"].value_counts()
+# Plot in the upper left the relationship between Year Built and the Sale Price
+plt.bar(train.YearBuilt, train.SalePrice)
+plt.title('YearBuilt')
+plt.show()
 
-collectn_2 = train.groupby(["Neighborhood"])["SalePrice"].value_counts()
+# Make the top right subplot active in the current 2x2 subplot grid 
+plt.subplot(2, 2, 2)
 
-# combine these different collections into a list    
-data_to_plot = [collectn_1, collectn_2]
+# Plot in the upper right the relationship between First Floor Square Feet and the Sale Price
+plt.bar(train["1stFlrSF"], train.SalePrice)
+plt.title('First Floor Square feet')
+plt.show()
 
-# Make boxplot
-plt.boxplot(data_to_plot)
+# Make the bottom left subplot active in the current 2x2 subplot grid
+plt.subplot(2, 2, 3)
 
-# Display the plot
+# Plot in the upper left the relationship between Second Floor Square Feet and the Sale Price
+plt.bar(train["2ndFlrSF"], train.SalePrice)
+plt.title('Second Floor Suare Feet')
+plt.show()
+
+# Make the bottom right subplot active in the current 2x2 subplot grid
+plt.subplot(2, 2, 4)
+
+# Plot in yellow the % of degrees awarded to women in the Education
+plt.plot(year, education, color='yellow')
+plt.title('Education')
+
+# Improve the spacing between subplots and display them
+plt.tight_layout()
 plt.show()
 ```
 
