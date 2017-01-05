@@ -304,11 +304,15 @@ all_data = pd.concat((train.loc[:,'MSSubClass':'SaleCondition'], test.loc[:,'MSS
 ```{python}
 import matplotlib.pyplot as plt
 
-# Plot in blue the % of degrees awarded to women in the Physical Sciences
-SalePrice = train.SalePrice
-LotFrontage = train.LotFrontage
-Neighborhood = train.Neighborhood
-plt.plot(SalePrice,Neighborhood)
+collectn_1 = train.groupby(["LotArea"])["SalePrice"].value_counts()
+
+collectn_2 = train.groupby(["Neighborhood"])["SalePrice"].value_counts()
+
+# combine these different collections into a list    
+data_to_plot = [collectn_1, collectn_2]
+
+# Make boxplot
+plt.boxplot(data_to_plot)
 
 # Display the plot
 plt.show()
