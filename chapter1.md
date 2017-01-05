@@ -259,18 +259,11 @@ print(train["SalePrice"].value_counts())
 print(train["SalePrice"].value_counts(normalize = True))
 
 # Different Neighborhood Sale Prices
-print(train["SalePrice"][train["Neighborhood"].value_counts())
+train.groupby(["Neighborhood"])["SalePrice"].mean()
 
 # Different Lot Configuration Sale prices
-print(train["SalePrice"][train["LotConfig"].value_counts())
+train.groupby(["LotConfig"])["SalePrice"].mean()
 
-
-
-# Normalized male survival
-print(train["SalePrice"][train["Sex"] == 'male'].value_counts(normalize = True))
-
-# Normalized female survival
-print(train["SalePrice"][train["Sex"] == 'female'].value_counts(normalize = True))
 
 ```
 
