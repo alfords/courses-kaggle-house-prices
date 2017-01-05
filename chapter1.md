@@ -331,10 +331,11 @@ plt.show()
 plt.subplot(2, 2, 4)
 
 # Plot in yellow the % of degrees awarded to women in the Education
-plt.plot(year, education, color='yellow')
-plt.title('Education')
+plt.bar(train.GrLivArea, train.SalePrice)
+plt.title('Great Room Living Area')
+plt.show()
 
-# Improve the spacing between subplots and display them
+# Improve the spacing between subplots and display all four plots
 plt.tight_layout()
 plt.show()
 ```
